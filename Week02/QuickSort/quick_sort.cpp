@@ -16,6 +16,20 @@ using namespace std;
  */
 int partitionFunct(int arr[], int low, int high) {
     //TODO - Fixme
+
+    //Pivot value is at arr[low[
+
+    //Set up i at low + 1, and j at high
+
+    //While i and j have not crossed over
+    //  Until i is at something larger than pivot or passes j, increment it
+    //  Until j is at something larger than pivot or passes i, decrement it
+    //  If i and j have not crossed, swap those elements
+
+    //Swap low and j to place pivot
+
+    //return new location of pivot
+
     return 0;  //Delete this
 }
 
