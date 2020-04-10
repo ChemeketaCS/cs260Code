@@ -13,18 +13,18 @@ template <class T>
 struct ListNode
 {
     T data;
-	ListNode* next;
+    ListNode* next;
 
     //Maintain a count of active nodes for testing
     // Not normally a part of the struct.
     // You should NOT modify or even use this value in your code.
     static int nodeCount;
 
-    ListNode(T value) {
-	    data = value;
-	    next = nullptr;
+    ListNode(const T& value) {
+        data = value;
+        next = nullptr;
         nodeCount++;
-	}
+    }
 
     ~ListNode() {
         nodeCount--;

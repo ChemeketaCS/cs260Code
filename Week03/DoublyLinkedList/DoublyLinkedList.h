@@ -29,7 +29,7 @@ struct ListNode
         nodeCount++;
 	}
 
-	ListNode(T value) {
+    ListNode(const T& value) {
 	    next = nullptr;
 	    prev = nullptr;
 	    data = value;
