@@ -143,8 +143,8 @@ void LinkedList<T>::insertStart(const T& value) {
     temp->next = head;  //old head is what new node points to
     head = temp;        //new node is now head
 
-    //if there is no second node, new node is both head and tail
-    if(head->next == nullptr)
+    //if this is the first node, it is tail and head
+    if(length == 0)
         tail = head;
 
     length++;
