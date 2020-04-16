@@ -30,23 +30,22 @@ void SimpleLinkedList::insertStart(int value) {
     head = newNode;
 }
 
+//---------------------------------------------
 
+//Assumes there is at least one node to work with
 string recursiveToString(ListNode* current) {
-    if(current == nullptr)
-        return "";
+    if(current->next == nullptr)
+        return to_string(current->data);
 
-    string result = to_string(current->data);
-
-    //Need to peek ahead to see if we need a space + more
-    if(current->next != nullptr) {
-        string rest = recursiveToString(current->next);
-        result = result + " " + rest;
-    }
+    string rest = recursiveToString(current->next);
+    string result = to_string(current->data) + " " + rest;
 
     return result;
 }
 
 string SimpleLinkedList::toString() {
+    if(head == nullptr)
+        return "";
     return recursiveToString(head);
 }
 
@@ -114,6 +113,8 @@ string recursiveReverseToString(ListNode* current) {
 }
 
 string SimpleLinkedList::reverseToString() {
+    if(head == nullptr)
+        return "";
     return recursiveReverseToString(head);
 }
 
