@@ -13,3 +13,7 @@ live two folders down from the root folder where doctest.h is located.
 
 For most projects, this basic recipe is sufficient:  
 `g++ *.cpp -g -I  ../../ -o program.exe`
+
+Assuming you do this in the Chemeketa Development Environment virtual machine,
+you should then be able to do:  
+`drmemory -- program.exe`
