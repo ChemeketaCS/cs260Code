@@ -29,7 +29,7 @@ public:
     }
 
     //Preincrement: Advance iterator one position
-    ArrayListIterator<T> operator++() {
+    ArrayListIterator<T>& operator++() {
         ++currentLoc;         //++ the pointer moves it forward size of one T
         return *this;
     }
