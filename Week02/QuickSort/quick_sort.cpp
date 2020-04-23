@@ -23,7 +23,7 @@ int partitionFunct(int arr[], int low, int high) {
 
     //While i and j have not crossed over
     //  Until i is at something larger than pivot or passes j, increment it
-    //  Until j is at something larger than pivot or passes i, decrement it
+    //  Until j is at something smaller than pivot or passes i, decrement it
     //  If i and j have not crossed, swap those elements
 
     //Swap low and j to place pivot
