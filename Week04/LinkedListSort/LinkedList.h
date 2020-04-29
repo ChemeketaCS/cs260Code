@@ -54,7 +54,7 @@ public:
     *   secondHalfList contains data from midpoint to end
     *
     *   If there are an odd number of items, the middle one should be part of
-    *    the first half
+    *    the second half
     *
     * @return list containing second half of this list
     */
