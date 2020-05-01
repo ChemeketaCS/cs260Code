@@ -4,6 +4,12 @@
 template<typename T>
 class Stack
 {
+private:
+    T* elements;
+    int size;
+    int capacity;
+    void ensureCapacity();
+
 public:
     Stack();
 
@@ -13,15 +19,9 @@ public:
 
     bool empty() const;
     T peek() const;
-    void push(T value);
+    void push(const T& value);
     T pop();
     int getSize() const;
-
-private:
-    T* elements;
-    int size;
-    int capacity;
-    void ensureCapacity();
 };
 
 template<typename T>
@@ -77,7 +77,7 @@ T Stack<T>::peek() const
 }
 
 template<typename T>
-void Stack<T>::push(T value)
+void Stack<T>::push(const T& value)
 {
     ensureCapacity();
     elements[size++] = value;

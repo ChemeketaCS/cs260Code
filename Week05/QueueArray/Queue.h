@@ -18,8 +18,8 @@ public:
     T *list;            //array to hold the list elements
     int arraySize;      //capacity of array used for storage
 
-    int start;          //index of the head of the queue
-    int end;            //index of the tail of the queue
+    int start;          //index of the front of the queue
+    int end;            //index of next available location at back
 
     //Helper function to add additional space
     void grow();
