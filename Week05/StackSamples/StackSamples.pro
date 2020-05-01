@@ -22,7 +22,7 @@ QMAKE_CXXFLAGS += -Wconversion
 QMAKE_CXXFLAGS += -pedantic
 QMAKE_CXXFLAGS += -pedantic-errors
 
-HEADERS += \
-    Stack.h
+HEADERS += Stack.h \
+    StackWithVector.h
 
 
