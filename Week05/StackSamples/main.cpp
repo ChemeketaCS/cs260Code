@@ -7,7 +7,7 @@ using namespace std;
 void solvePostFix() {
     Stack<int> nums;
 
-    cout << "Enter a postfix expression:" << endl;
+    cout << "Enter a postfix expression (like \"5 6 + 10 -\") :" << endl;
 
     //Read in input, place items on stacks
     while(cin.peek() != '\n') {
@@ -45,7 +45,7 @@ void solvePostFix() {
 void solveParens() {
     Stack<char> parens;
 
-    cout << "Enter a line - I will check for matched () [] and {}:" << endl;
+    cout << "Enter an expression with parentheses - I will check for matched () [] and {}:" << endl;
 
 
     bool success = true;
