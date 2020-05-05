@@ -3,7 +3,6 @@ CONFIG   -= debug_and_release
 CONFIG   -= app_bundle
 
 TEMPLATE = app
-SOURCES += main.cpp
 SOURCES += test.cpp
 
 
