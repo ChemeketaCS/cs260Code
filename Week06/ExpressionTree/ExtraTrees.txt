@@ -1,0 +1,10 @@
+	BinaryOperatorNode* root = new BinaryOperatorNode('/');
+	BinaryOperatorNode* n1 = new BinaryOperatorNode('-');
+	ValueNode* n2 = new ValueNode(7);
+	ValueNode* n3 = new ValueNode(15);
+	ValueNode* n4 = new ValueNode(1);
+
+	root->left = n1;
+	root->right = n2;
+	n1->left = n3;
+	n1->right = n4;
