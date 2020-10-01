@@ -116,7 +116,7 @@ TEST_CASE( "LL/Clear" ) {
     test_list.clear();
 
     REQUIRE( test_list.head == nullptr );
-    REQUIRE( test_list.head == nullptr );
+    REQUIRE( test_list.tail == nullptr );
     REQUIRE( test_list.length == 0 );
     //Were they actually deleted???
     REQUIRE( startNodeCount - ListNode<int>::nodeCount == 3 );
