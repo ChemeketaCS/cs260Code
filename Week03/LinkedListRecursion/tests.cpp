@@ -19,7 +19,7 @@ void buildTestIntList(SimpleLinkedList& list) {
     list.insertStart(10);
 }
 
-TEST_CASE( "LL/recursiveReversePrint" ) {
+TEST_CASE( "LL/recursiveReverseToString" ) {
     SimpleLinkedList test_list;
     buildTestIntList(test_list);  //10, 20, 30
 
