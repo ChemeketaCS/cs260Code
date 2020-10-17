@@ -69,6 +69,7 @@ public:
     int listSize() const;
 
     void insertStart(const T& value);
+    void removeEnd();
 
     void insertAt(int index, const T& value);
     void removeAt(int index);
@@ -145,19 +146,20 @@ DoublyLinkedList<T>::DoublyLinkedList() {
 
 }
 
+template <class T>
+void DoublyLinkedList<T>::removeEnd() {
+    if(length == 0)
+        throw out_of_range("Bad index in removeAt");
+
+    //TODO - remove last node in list
+
+}
+
 
 template <class T>
 void DoublyLinkedList<T>::insertAt(int index, const T& value) {
     if(index > length || index < 0)
         throw out_of_range("Bad index in insertAt");
-    //TODO - implement
-
-}
-
-template <class T>
-void DoublyLinkedList<T>::removeAt(int index) {
-    if(index >= length || index < 0)
-        throw out_of_range("Bad index in removeAt");
     //TODO - implement
 
 }
