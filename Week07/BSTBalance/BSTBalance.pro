@@ -25,7 +25,6 @@ QMAKE_CXXFLAGS += -pedantic-errors
 
 HEADERS += \
     BSTNode.h \
-    BSTNodePrettyPrint.h \
     CharBST.h
 
 INCLUDEPATH += ../../
