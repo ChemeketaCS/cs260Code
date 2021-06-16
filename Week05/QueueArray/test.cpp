@@ -95,7 +95,9 @@ TEST_CASE( "WrapEnd" ) {
 
     q.enqueue('G');
     q.enqueue('H');
+    REQUIRE( q.end == 0 );
     q.enqueue('I');
+    REQUIRE( q.end == 1 );
 
     INFO(q.toString());
     REQUIRE( q.list[0] == 'I' );
