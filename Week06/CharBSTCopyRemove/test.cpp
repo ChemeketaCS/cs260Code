@@ -17,7 +17,6 @@
 using doctest::Approx;
 
 #include "CharBST.h"
-//#include "code.cpp"     //Your code in cpplab
 
 //Declare helper functions from the .cpp file so that we can directly test them
 char smallestValueFrom(BSTNode<char>* curNode);

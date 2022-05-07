@@ -17,7 +17,6 @@
 using doctest::Approx;
 
 #include "CharBST.h"
-//#include "code.cpp"     //Your code in cpplab
 
 using namespace std;
 

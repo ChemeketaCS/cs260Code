@@ -17,7 +17,6 @@
 using doctest::Approx;
 
 #include "StringHashTable.h"
-//#include "code.cpp"     //Your code in cpplab
 
 #include <vector>
 
