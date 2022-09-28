@@ -1,6 +1,4 @@
 
-#include "Searches.h"
-
 //You can only test one version of binarySearch at a time
 //Comment out one to test the other.
 //(Select lines and "Ctrl /" to comment/uncomment a block of lines)
