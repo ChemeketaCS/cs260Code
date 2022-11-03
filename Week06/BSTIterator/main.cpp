@@ -3,6 +3,9 @@
 #include <ctime>
 #include <vector>
 #include <cassert>
+#include <algorithm>
+#include <iostream>
+#include <iterator>
 
 #include "CharBST.h"
 #include "CharBSTIterator.h"
@@ -30,6 +33,15 @@ int main() {
         cout << endl;
     }
 
+    cout << "---------------------------------------------" << endl;
+
+    cout << "Using std::transform to increase each char by 1" << endl;
+    transform(myBST.begin(), myBST.end(), myBST.begin(), [](char c) { return c + 1; });
+
+    for(auto it = myBST.begin(); it != myBST.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
 }
 
 
