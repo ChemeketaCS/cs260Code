@@ -36,3 +36,4 @@
 *.pro.user*
 Makefile*
 .vscode*
+Debug/
