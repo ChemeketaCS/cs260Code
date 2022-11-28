@@ -45,7 +45,7 @@ public:
     vector<T> getVertices() const;
 
     /** Return the neighbors of vertex v */
-    list<int> getNeighbors(int v) const;
+    vector<int> getNeighbors(int v) const;
 
     /** Add a directed edge connecting vertex v to vertex u **/
     void addEdge(int v, int u);
@@ -122,7 +122,7 @@ vector<T> Graph<T>::getVertices() const
 }
 
 template <typename T>
-list<int> Graph<T>::getNeighbors(int v) const
+vector<int> Graph<T>::getNeighbors(int v) const
 {
     return neighbors[v];
 }
@@ -137,10 +137,10 @@ template <typename T>
 void Graph<T>::printAdjacencyList() const
 {
     cout << "Adjaceny list format:" << endl;
-    for (int u = 0; u < neighbors.size(); u++)
+    for (size_t u = 0; u < neighbors.size(); u++)
     {
         cout << "Vertex " << u << ": ";
-        for (int v = 0; v < neighbors[u].size(); v++)
+        for (size_t v = 0; v < neighbors[u].size(); v++)
         {
             cout << neighbors[u][v] << " ";
         }
@@ -153,20 +153,20 @@ void Graph<T>::printAdjacencyMatrix() const
 {
     cout << "Adjaceny matrix format:" << endl;
 
-    int size = vertexValues.size();
+    size_t size = vertexValues.size();
     // Use vector for 2-D array
     vector< vector<int> > adjacencyMatrix(size);
 
     // Initialize 2-D array for adjacency matrix
-    for (int i = 0; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
         adjacencyMatrix[i] = vector<int>(size);
     }
 
-    for (int u = 0; u < neighbors.size(); u++)
+    for (size_t u = 0; u < neighbors.size(); u++)
     {
         //for each neighbor
-        for (int j = 0; j < neighbors[u].size(); j++)
+        for (size_t j = 0; j < neighbors[u].size(); j++)
         {
             //figure out its index
             int v = neighbors[u][j];
@@ -176,9 +176,9 @@ void Graph<T>::printAdjacencyMatrix() const
         }
     }
 
-    for (int i = 0; i < adjacencyMatrix.size(); i++)
+    for (size_t i = 0; i < adjacencyMatrix.size(); i++)
     {
-        for (int j = 0; j < adjacencyMatrix[i].size(); j++)
+        for (size_t j = 0; j < adjacencyMatrix[i].size(); j++)
         {
             cout << adjacencyMatrix[i][j] << " ";
         }
@@ -208,7 +208,7 @@ SearchTree Graph<T>::bfs(int startVertex) const
         queue.pop_front(); // Remove it from queue
 
         //for each edge from parent
-        for (int j = 0; j < neighbors[u].size(); j++)
+        for (size_t j = 0; j < neighbors[u].size(); j++)
         {
             int neighbor = neighbors[u][j];
             if (!isSeen[neighbor])
@@ -246,7 +246,7 @@ SearchTree Graph<T>::dfsIterative(int startVertex) const
 
             //for each edge from parent
             // do in reverse order so edge to lowest index vertex gets explored first
-            for (int j = neighbors[u].size() - 1; j >= 0; j--)
+            for (int j = static_cast<int>(neighbors[u].size()) - 1; j >= 0; j--)
             {
                 int neighbor = neighbors[u][j];
                 if (!isVisited[neighbor])

@@ -63,7 +63,7 @@ void SearchTree::printAllPaths() {
         if (parentList[i] != -1) {
             // We can get there - get path, print in reverse order
             vector<int> path = getPath(i);
-            for(int j = path.size() - 1; j >= 0; j--) {
+            for(int j = static_cast<int>(path.size()) - 1; j >= 0; j--) {
                 cout << path[j] << " ";
             }
 
