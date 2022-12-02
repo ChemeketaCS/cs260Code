@@ -260,3 +260,34 @@ TEST_CASE( "Grow" ) {
     }
 }
 
+//Return next string in alphabetic order
+// AAA, AAB, AAC..., AAZ, ABA, ABB,...
+string nextString(string s) {
+    for(int i = static_cast<int>(s.length() - 1); i >= 0; i--) {
+        if(s[i] < 'Z') {
+            s[i]++;
+            break;
+        }
+        else
+            s[i] = 'A';
+    }
+    return s;
+}
+
+TEST_CASE( "GrowStressTest" ) {
+    StringHashTable t;
+
+    string s = "AAA";
+    for(int i = 0; i < 100; i++) {
+        t.insert(s);
+        s = nextString(s);
+    }
+
+    //Are they all still there?
+    REQUIRE( t.size() == 100 );
+    s = "AAA";
+    for(int i = 0; i < 100; i++) {
+        REQUIRE( t.contains(s) );
+        s = nextString(s);
+    }
+}

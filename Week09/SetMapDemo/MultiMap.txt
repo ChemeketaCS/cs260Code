@@ -1,0 +1,44 @@
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+
+int main()
+
+{
+    multimap<char, string> map1;
+
+    map1.insert(pair<char, string>('A', "Apple"));
+    map1.insert(pair<char, string>('A', "Ant"));
+    map1.insert(pair<char, string>('A', "Art"));
+    map1.insert(pair<char, string>('C', "Carrot"));
+    map1.insert(pair<char, string>('B', "Boat"));
+    map1.insert(pair<char, string>('B', "Banana"));
+    map1.emplace('B', "Bongo");
+    //map1['B'] = "Bongo";  //no can do
+
+    cout << "Initial contents in map1:\n";
+    map<char, string>::iterator p;
+    for (p = map1.begin(); p != map1.end(); ++p)
+        cout << p->first << " " << p->second << endl;
+
+    cout << "Enter a key to serach for: ";
+    char key;
+    cin >> key;
+    if(map1.find(key) != map1.end())
+        cout << " I have that" << endl;
+
+
+    //pair<multimap<char, string>::iterator, multimap<char, string>::iterator> iteratorPair = map1.equal_range(key);
+    auto iteratorPair = map1.equal_range('B');
+    if(iteratorPair.first == iteratorPair.second)
+        cout << "Not found";
+    else {
+        for(auto myIt = iteratorPair.first; myIt != iteratorPair.second; ++myIt) {
+            cout << myIt->second << " ";
+        }
+    }
+
+    return 0;
+}
+

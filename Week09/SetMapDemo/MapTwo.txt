@@ -1,0 +1,59 @@
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+
+int main()
+{
+    map<int, string> employeeMap;
+    //formal
+    employeeMap.insert(map<int, string>::value_type(100, "John Smith"));
+
+    //informal
+    employeeMap.insert(pair<int, string>(112, "Dave Smith"));
+
+    //easy
+    employeeMap[123] = "Bob Smith";
+
+    //C++11 new feature:
+    employeeMap.emplace(119,"Ron Burgendy");
+
+
+    //bye bye Bob - replace him
+    employeeMap[123] = "Peter King";
+    employeeMap[102] = "Jane Smith";
+    employeeMap[103] = "Jeff Reed";
+
+//    //bye Jeff - erase by key
+//    employeeMap.erase(103);
+//    //erase by iterator position
+//    employeeMap.erase(employeeMap.begin());
+//    //no erase by value
+//    employeeMap.erase("Ron Burgendy");
+
+    cout << "Initial contents in employeeMap:\n";
+    map<int, string>::iterator mapIt;
+    for (mapIt = employeeMap.begin(); mapIt != employeeMap.end(); mapIt++)
+        cout << mapIt->first << " " << mapIt->second << endl;
+
+    cout << "Enter an employee number: ";
+    int key;
+    cin >> key;
+    auto employeeLoc = employeeMap.find(key);
+
+    if (employeeLoc == employeeMap.end())
+        cout << "  Key " << key << " not found in map1";
+    else
+        cout << "  " << employeeLoc->first << " " << employeeLoc->second << endl;
+
+
+
+    employeeMap.erase(103);
+
+
+    cout << "\nAfter the erase function, map1:\n";
+    for (auto p = employeeMap.begin(); p != employeeMap.end(); p++)
+        cout << p->first << " " << p->second << endl;
+
+    return 0;
+}

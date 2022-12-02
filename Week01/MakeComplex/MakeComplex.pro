@@ -8,8 +8,8 @@ SOURCES += \
     Answer.cpp
 
 
-QMAKE_CXXFLAGS += -std=c++11
-QMAKE_LFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++17
+QMAKE_LFLAGS += -std=c++17
 
 QMAKE_CXXFLAGS += -Wmissing-include-dirs
 QMAKE_CXXFLAGS += -Wfloat-equal

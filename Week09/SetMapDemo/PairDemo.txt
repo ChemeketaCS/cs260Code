@@ -1,0 +1,19 @@
+#include <iostream>
+#include <utility>
+#include <string>
+using namespace std;
+
+int main()
+{
+    pair<string, int> p1;
+    p1.first = "one";
+    p1.second = 1;
+
+    pair<string, int> p2 {"two", 2};
+
+    cout << p1.first << ":" << p1.second << endl;
+    cout << p2.first << ":" << p2.second << endl;
+
+    return 0;
+}
+
