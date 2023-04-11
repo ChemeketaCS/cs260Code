@@ -157,4 +157,6 @@ TEST_CASE( "MergeSort/Big" ) {
     bool correctVals = std::equal(list, list + size, list_key);
     INFO("Your array does not have the right elements!");
     REQUIRE( correctVals == true );
+    delete [] list;
+    delete [] list_key;
 }
