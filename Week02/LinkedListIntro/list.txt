@@ -1,0 +1,53 @@
+#include <iostream>
+
+template<typename T>
+class Node {
+public:
+    //Value stored in this node
+    T element;
+    //Next node in list (nullptr == end of list)
+    Node* next = nullptr;
+
+    //Node must be constructed with a value - stored as element
+    Node(T value) : element(value) {}
+};
+
+using namespace std;
+
+Node<int>* makeList() {
+    //Start of a list of nodes
+    Node<int>* head = new Node<int>(15);
+
+    Node<int>* temp;  //pointer to track new nodes
+
+    temp = new Node<int>(10);
+    temp->next = head;
+    head = temp;
+
+    temp = new Node<int>(5);
+    temp->next = head;
+    head = temp;
+
+    return head;
+}
+
+int main()
+{
+    Node<int>* head = makeList();
+
+    //Make a pointer to track our position
+    Node<int>* current = head;
+    //When we hit null, we've gotten to end
+    while(current != nullptr) {
+        cout << current->element << " ";  //work
+        //advance in the list
+        current = current->next;
+    }
+    cout << endl;
+
+    while(head != nullptr) {
+        Node<int>* toDelete = head;
+        head = head->next;
+        delete toDelete;
+    }
+}
