@@ -114,6 +114,8 @@ TEST_CASE( "LL/InsertAtSpecialCases" ) {
     REQUIRE( test_list.length == 5 );
     REQUIRE( test_list.retrieveAt(3) == 3 );
     REQUIRE( test_list.retrieveAt(4) == 20 );
+    //Make sure tail was updated
+    REQUIRE( test_list.tail->data == 20 );
 }
 
 TEST_CASE( "LL/Clear" ) {
