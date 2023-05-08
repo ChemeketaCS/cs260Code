@@ -6,29 +6,41 @@ using namespace std;
 
 void printPreOrder(ExpressionNode* current) {
     //check if node is a BinaryOperator
-    //If so then print current node, then recursively print left subtree and right subtree
-    //Else print current node
+    BinaryOperatorNode* currAsOpNode = dynamic_cast<BinaryOperatorNode*>(current);
+    if(currAsOpNode != nullptr) {
+        //print self, RecurseLeft, RecurseRight
+        cout << currAsOpNode->toString() << " ";
+        printPreOrder(currAsOpNode->left);
+        printPreOrder(currAsOpNode->right);
+    } else {
+        //Must be a plain ValueNode, so just print
+        cout << current->toString() << " ";
+    }
 }
 
 void printPostOrder(ExpressionNode* current) {
     //check if node is a BinaryOperator
-    //If so then recursively print left and right subtrees, then print current node
-    //Else print current node
-
+    BinaryOperatorNode* currAsOpNode = dynamic_cast<BinaryOperatorNode*>(current);
+    if(currAsOpNode != nullptr) {
+        //RecurseLeft, RecurseRight, print self
+        printPostOrder(currAsOpNode->left);
+        printPostOrder(currAsOpNode->right);
+        cout << currAsOpNode->toString() << " ";
+    } else {
+        //Must be a plain ValueNode, so just print
+        cout << current->toString() << " ";
+    }
 }
+
 void printInOrder(ExpressionNode* current) {
     //check if node is a BinaryOperator
     BinaryOperatorNode* currAsOpNode = dynamic_cast<BinaryOperatorNode*>(current);
     if(currAsOpNode != nullptr) {
-        //Print ( for grouping - infix order needs parens
         cout << "( ";
-
         //RecurseLeft, print self, RecurseRight
         printInOrder(currAsOpNode->left);
         cout << currAsOpNode->toString() << " ";
         printInOrder(currAsOpNode->right);
-
-        //close parens
         cout << ") ";
     } else {
         //Must be a plain ValueNode, so just print
@@ -82,12 +94,13 @@ int main()
     printInOrder( root );
     cout << endl;
 
-    cout << "PreOrder:  ";
-    printPreOrder( root );
-    cout << endl;
-
     cout << "PostOrder: ";
     printPostOrder( root );
+    cout << endl;
+
+
+    cout << "PreOrder:  ";
+    printPreOrder( root );
     cout << endl;
 
     delete root;
