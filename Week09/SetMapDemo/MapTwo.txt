@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <unordered_map>
 using namespace std;
 
 int main()
@@ -32,7 +33,7 @@ int main()
 //    employeeMap.erase("Ron Burgendy");
 
     cout << "Initial contents in employeeMap:\n";
-    map<int, string>::iterator mapIt;
+    auto mapIt;
     for (mapIt = employeeMap.begin(); mapIt != employeeMap.end(); mapIt++)
         cout << mapIt->first << " " << mapIt->second << endl;
 

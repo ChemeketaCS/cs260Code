@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <unordered_map>
 using namespace std;
 
 int main()
@@ -18,7 +19,7 @@ int main()
     //map1['B'] = "Bongo";  //no can do
 
     cout << "Initial contents in map1:\n";
-    map<char, string>::iterator p;
+    auto p;
     for (p = map1.begin(); p != map1.end(); ++p)
         cout << p->first << " " << p->second << endl;
 

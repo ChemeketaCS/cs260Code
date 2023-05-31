@@ -1,6 +1,7 @@
 #include <iostream>
 #include <set>
 #include <string>
+#include <unordered_set>
 using namespace std;
 
 
@@ -24,7 +25,7 @@ int main()
     cin >> searchWord;
 
     //Find returns an iterator. It is == .end() if item not found
-    set<string>::iterator wordLoc = words.find(searchWord);
+    auto wordLoc = words.find(searchWord);
     if( wordLoc == words.end() ) {
         cout << "That word is not present" << endl;
     } else {
