@@ -7,3 +7,4 @@ a program by hand, do this in the project folder:
 ```bash
 make -f MyMake
 ```   
+test
