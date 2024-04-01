@@ -32,8 +32,5 @@
 *.app
 
 # Other
-*.qmake.stash
 *.pro.user*
-Makefile*
-.vscode*
 Debug/
