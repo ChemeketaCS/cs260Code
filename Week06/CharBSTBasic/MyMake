@@ -1,4 +1,0 @@
-PATH_TO_DOCTEST = -I../..
-
-all:
-	g++ $(PATH_TO_DOCTEST) -std=c++17 -g *.cpp -o program.exe

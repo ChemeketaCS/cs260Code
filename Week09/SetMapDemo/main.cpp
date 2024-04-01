@@ -1,25 +1,43 @@
 #include <iostream>
-#include <map>
-#include <unordered_map>
+#include <set>
 #include <string>
+#include <unordered_set>
 using namespace std;
+
+
 
 int main()
 {
-    unordered_map<char, string> babyWords;
-    babyWords['A'] = "Apple";
-    babyWords['B'] = "Banana";
+    unordered_set<string> words = {"carrot", "apple"};
 
-    if(babyWords.find('C') != babyWords.end())
-        cout << "We have a C" << endl;
-    else
-        cout << "No C" << endl;
+    words.insert("banana");
+    words.insert("banana");
+    words.insert("guava");
 
-    //Try to print C that is not there...
-    cout <<  babyWords['C'] << endl;
+    for(auto it = words.begin(); it != words.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
 
-    if(babyWords.find('C') != babyWords.end())
-        cout << "We have a C" << endl;
-    else
-        cout << "No C" << endl;
+
+    cout << "What word should I remove? ";
+    string searchWord;
+    cin >> searchWord;
+
+    //Find returns an iterator. It is == .end() if item not found
+    auto wordLoc = words.find(searchWord);
+    if( wordLoc == words.end() ) {
+        cout << "That word is not present" << endl;
+    } else {
+        //Erase word using the iterator
+        words.erase(wordLoc);
+
+        cout << "Removed. Set is now: ";
+        for(auto it = words.begin(); it != words.end(); ++it) {
+            cout << *it << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
 }

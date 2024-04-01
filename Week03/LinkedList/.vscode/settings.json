@@ -1,0 +1,6 @@
+{
+    "lldb.dereferencePointers": false,
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, AllowShortFunctionsOnASingleLine: None, PointerAlignment: Left, SpaceBeforeParens: Never }",
+    "editor.tabSize": 2,
+    "C_Cpp.default.compilerPath": "C:\\mingw64\\bin\\g++.exe"
+}
