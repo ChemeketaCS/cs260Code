@@ -92,6 +92,6 @@ void StringHashTable::remove(const std::string& key) {
 
 void StringHashTable::grow() {
     //TODO - Fix me
-    //Allocate new storage that is soldSize * 2 + 1 in size
+    //Allocate new storage that is oldCapacity * 2 + 1 in size
     //Rehash all non-empty/tombstone value from old array back into table
 }
