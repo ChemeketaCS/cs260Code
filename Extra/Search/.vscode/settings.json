@@ -1,5 +1,0 @@
-{
-    "lldb.dereferencePointers": false,
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, AllowShortFunctionsOnASingleLine: None, PointerAlignment: Left, SpaceBeforeParens: Never }",
-    "editor.tabSize": 2
-}
