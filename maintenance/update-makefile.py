@@ -36,12 +36,12 @@ def main() -> int:
     updated = []
     skipped = []
 
-    # Find all directories anywhere that start with "Week"
-    for p in repo_root.glob("Week*"):
+    # Find all directories
+    for p in repo_root.glob("*"):
         if p.is_dir():
             week_dirs.append(p)
 
-    # Process Makefiles inside each Week* directory (recursively)
+    # Process Makefiles inside each directory (recursively)
     for wd in week_dirs:
         for mk in wd.rglob("Makefile"):
             if not mk.is_file():

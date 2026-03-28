@@ -3,8 +3,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-
-
 // Use Approx from doctest without saying doctest::Approx
 using doctest::Approx;
 
