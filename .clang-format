@@ -1,0 +1,13 @@
+BasedOnStyle: LLVM
+AllowShortFunctionsOnASingleLine: None
+PointerAlignment: Left
+AlwaysBreakTemplateDeclarations: Yes
+SpaceAfterTemplateKeyword: false
+BreakBeforeBinaryOperators: NonAssignment
+BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+SpaceBeforeCtorInitializerColon: false
+SpaceBeforeInheritanceColon: false
+IndentGotoLabels: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+SpaceAroundPointerQualifiers: Both
