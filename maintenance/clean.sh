@@ -1,0 +1,1 @@
+find -type f -wholename "./Week*/*/*.clang-format" -delete

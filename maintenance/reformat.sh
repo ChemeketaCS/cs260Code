@@ -1,0 +1,1 @@
+find -regextype egrep -regex '\./Week.*\.(cpp|h|cpp.bak)' -exec clang-format -i {} \;
