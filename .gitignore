@@ -34,3 +34,6 @@
 # Other
 *.pro.user*
 Debug/
+
+# Top level .vscode directory
+/.vscode/
