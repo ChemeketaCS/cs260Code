@@ -15,22 +15,22 @@ using namespace std;
  * where p is index of pivot value
  */
 int partitionFunct(int arr[], int low, int high) {
-    //TODO - Fixme
+  // TODO - Fixme
 
-    //Pivot value is at arr[low[
+  // Pivot value is at arr[low[
 
-    //Set up i at low + 1, and j at high
+  // Set up i at low + 1, and j at high
 
-    //While i and j have not crossed over
-    //  Until i is at something larger than pivot or passes j, increment it
-    //  Until j is at something smaller than pivot or passes i, decrement it
-    //  If i and j have not crossed, swap those elements
+  // While i and j have not crossed over
+  //   Until i is at something larger than pivot or passes j, increment it
+  //   Until j is at something smaller than pivot or passes i, decrement it
+  //   If i and j have not crossed, swap those elements
 
-    //Swap low and j to place pivot
+  // Swap low and j to place pivot
 
-    //return new location of pivot
+  // return new location of pivot
 
-    return 0;  //Delete this
+  return 0; // Delete this
 }
 
 /**
@@ -39,18 +39,17 @@ int partitionFunct(int arr[], int low, int high) {
  * @param low start of range to sort (inclusive)
  * @param high end of range to sort (inclusive)
  */
-void quickSortInternal (int arr[], int low, int high) {
-    if (low >= high) return; // base case : 1 or less item
+void quickSortInternal(int arr[], int low, int high) {
+  if (low >= high)
+    return; // base case : 1 or less item
 
-    //call partitionFunction to partition range low - high
-    // it will return pivot location
+  // call partitionFunction to partition range low - high
+  //  it will return pivot location
 
-    //recursively sort from low to pivot - 1
-    //recursiely sort from pivot + 1 to high
+  // recursively sort from low to pivot - 1
+  // recursiely sort from pivot + 1 to high
 }
 
-void quickSort (int arr[], int arrSize) {
-    quickSortInternal (arr, 0, arrSize-1);
+void quickSort(int arr[], int arrSize) {
+  quickSortInternal(arr, 0, arrSize - 1);
 }
-
-

@@ -5,15 +5,13 @@
 
 using namespace std;
 
-int main()
-{
-    int* foo = nullptr;     //requires c++11
+int main() {
+  int* foo = nullptr; // requires c++11
 
-	int aNum = getANumber();
-	int doubled = doubleIt(aNum);
-	
-	out << aNum << " doubled is " << doubled << endl;
+  int aNum = getANumber();
+  int doubled = doubleIt(aNum);
 
-    return 0;
+  out << aNum << " doubled is " << doubled << endl;
+
+  return 0;
 }
-

@@ -1,8 +1,8 @@
-//Defines a silly function
+// Defines a silly function
 
 #ifndef HELPER_H
 #define HELPER_H
 
 int getANumber();
 
-#endif  //HELPER_H
+#endif // HELPER_H

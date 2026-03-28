@@ -1,55 +1,46 @@
-#include <iostream>
 #include <ctime>
-
+#include <iostream>
 
 using namespace std;
 
+bool isPrime(int n) {
+  bool result = true;
 
-bool isPrime(int n)
-{
-    bool result = true;
-
-    //Replace test with "i*i <= n" to run in O(sqrt(n)) time
-    for (int i = 2; i < n; i++)
-    {
-        int* np = new int;
-        if (0 == n % i)  {
-            result = false;
-            //we could just return here...
-            //But not doing so runtime depend more directly on n
-            //and not on if n is actually prime or not
-        }
-        delete np;
+  // Replace test with "i*i <= n" to run in O(sqrt(n)) time
+  for (int i = 2; i < n; i++) {
+    int* np = new int;
+    if (0 == n % i) {
+      result = false;
+      // we could just return here...
+      // But not doing so runtime depend more directly on n
+      // and not on if n is actually prime or not
     }
-    return result;
+    delete np;
+  }
+  return result;
 }
 
-int main()
-{
+int main() {
+  const int TIMING_REPETITIONS = 100;
+  clock_t start = clock();
+  cout << start << endl;
 
-    const int TIMING_REPETITIONS = 100;
-    clock_t start = clock();
-    cout << start << endl;
-	
-    int result;
-	//Repeat work many times to get measurable duration
-    for(int i = 0; i < TIMING_REPETITIONS; i++) {
-		//Work we want to measure
- 		result = isPrime(100000);
-	}
+  int result;
+  // Repeat work many times to get measurable duration
+  for (int i = 0; i < TIMING_REPETITIONS; i++) {
+    // Work we want to measure
+    result = isPrime(100000);
+  }
 
-    clock_t end = clock();
-    cout << end << endl;
-    cout << (end - start) << endl;
-    
-	//Figure out average time to do work one time
-    double seconds = static_cast<double>(end - start)
-                        / CLOCKS_PER_SEC;
-                        /// TIMING_REPETITIONS;
+  clock_t end = clock();
+  cout << end << endl;
+  cout << (end - start) << endl;
 
-    cout << endl << "Answer is " << result << endl;
+  double totalSeconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+  // Figure out average time to do work one time
+  double seconds = totalSeconds / TIMING_REPETITIONS;
 
-    cout << endl << "Calculations took " << seconds << " seconds" << endl;
+  cout << endl << "Answer is " << result << endl;
+
+  cout << endl << "Calculations took " << seconds << " seconds" << endl;
 }
-
-

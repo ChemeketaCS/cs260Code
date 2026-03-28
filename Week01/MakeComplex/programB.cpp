@@ -5,15 +5,13 @@
 
 using namespace std;
 
+int main() {
+  cout << "This is program B" << endl;
 
-int main()
-{
-    cout << "This is program B" << endl;
+  int a = getAnswer();
+  char b = a;
 
-    int a = getAnswer();
-    char b = a;
+  cout << doubleIt(b) << endl;
 
-    cout << doubleIt(b) << endl;
-
-    return 0;
+  return 0;
 }

@@ -4,12 +4,10 @@
 
 using namespace std;
 
-int main()
-{
-    int* foo = nullptr;     //requires c++11
+int main() {
+  int* foo = nullptr; // requires c++11
 
-    cout << "The answer is: " << getAnswer() << endl;
+  cout << "The answer is: " << getAnswer() << endl;
 
-    return 0;
+  return 0;
 }
-

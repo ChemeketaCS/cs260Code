@@ -5,43 +5,43 @@ using namespace std;
 
 ///----------------------CON/DE STRUCTORS----------------------------
 CharBST::CharBST() {
-    root = nullptr;
+  root = nullptr;
 }
 
 CharBST::~CharBST() {
-    //Destructor not provided - currently leaks all nodes
+  // Destructor not provided - currently leaks all nodes
 }
 
 ///------------------------toVector---------------------------
 
 void vecBuilder(BSTNode<char>* curNode, vector<char>& theVec) {
-    if(curNode == nullptr)
-        return;
+  if (curNode == nullptr)
+    return;
 
-    vecBuilder(curNode->left, theVec);
-    theVec.push_back(curNode->value);
-    vecBuilder(curNode->right, theVec);
+  vecBuilder(curNode->left, theVec);
+  theVec.push_back(curNode->value);
+  vecBuilder(curNode->right, theVec);
 }
 
 vector<char> CharBST::toVector() {
-    vector<char> theVec;
-    vecBuilder(root, theVec);
-    return theVec;
+  vector<char> theVec;
+  vecBuilder(root, theVec);
+  return theVec;
 }
 
 ///-----------------------Itarators----------------------------
 CharBSTIterator CharBST::begin() {
-    CharBSTIterator bIt;
+  CharBSTIterator bIt;
 
-    BSTNode<char>* current = root;
-    while(current != nullptr) {
-        bIt.positionStack.push_back(current);
-        current = current->left;
-    }
+  BSTNode<char>* current = root;
+  while (current != nullptr) {
+    bIt.positionStack.push_back(current);
+    current = current->left;
+  }
 
-    return bIt;
+  return bIt;
 }
 
 CharBSTIterator CharBST::end() {
-    return CharBSTIterator();
+  return CharBSTIterator();
 }

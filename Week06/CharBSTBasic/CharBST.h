@@ -6,32 +6,31 @@
 #include "BSTNode.h"
 
 class CharBST {
-//Would normally be private.
-//Made public to allow intrusive unit tests.
+  // Would normally be private.
+  // Made public to allow intrusive unit tests.
 public:
-    BSTNode<char>* root;
+  BSTNode<char>* root;
 
 public:
-    ///Constructor - root inited to null
-    CharBST();
-    ///Destructor - deletes any child nodes
-    ~CharBST();
+  /// Constructor - root inited to null
+  CharBST();
+  /// Destructor - deletes any child nodes
+  ~CharBST();
 
-    ///Produce an in order string representation
-    std::string toString() const;
+  /// Produce an in order string representation
+  std::string toString() const;
 
-    ///check if value is present
-    bool containsRecursive(char val) const;
-    bool containsIterative(char val) const;
+  /// check if value is present
+  bool containsRecursive(char val) const;
+  bool containsIterative(char val) const;
 
-    ///add (a possibly duplicate) value to tree
-    void insertRecursive(char val);
-    void insertIterative(char val);
+  /// add (a possibly duplicate) value to tree
+  void insertRecursive(char val);
+  void insertIterative(char val);
 
-    ///Disable copy/assignment - these are declared but not defined
-    CharBST(const CharBST& val);
-    CharBST& operator=(const CharBST& val);
+  /// Disable copy/assignment - these are declared but not defined
+  CharBST(const CharBST& val);
+  CharBST& operator=(const CharBST& val);
 };
 
 #endif // CHARBST_H
-

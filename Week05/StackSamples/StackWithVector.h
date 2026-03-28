@@ -4,49 +4,43 @@
 #include <vector>
 
 template<typename T>
-class VectorStack
-{
+class VectorStack {
 private:
-    std::vector<T> store;
+  std::vector<T> store;
 
 public:
-    T peek() const;
-    void push(const T& value);
-    T pop();
-    int getSize() const;
-    bool empty() const;
+  T peek() const;
+  void push(const T& value);
+  T pop();
+  int getSize() const;
+  bool empty() const;
 };
 
 template<typename T>
-bool VectorStack<T>::empty() const
-{
-    return store.empty();
+bool VectorStack<T>::empty() const {
+  return store.empty();
 }
 
 template<typename T>
-T VectorStack<T>::peek() const
-{
-    return store[store.size - 1];
+T VectorStack<T>::peek() const {
+  return store[store.size - 1];
 }
 
 template<typename T>
-T VectorStack<T>::pop()
-{
-    T temp = store[store.size - 1];
-    store.pop_back();
-    return temp;
+T VectorStack<T>::pop() {
+  T temp = store[store.size - 1];
+  store.pop_back();
+  return temp;
 }
 
 template<typename T>
-void VectorStack<T>::push(const T& value)
-{
-    store.push_back(value);
+void VectorStack<T>::push(const T& value) {
+  store.push_back(value);
 }
 
 template<typename T>
-int VectorStack<T>::getSize() const
-{
-    return store.size();
+int VectorStack<T>::getSize() const {
+  return store.size();
 }
 
 #endif
