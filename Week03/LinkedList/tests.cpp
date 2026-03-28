@@ -3,8 +3,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-// Hide some false warnings - this is supposed to look commented out
-//  clazy:skip
+
 
 // Use Approx from doctest without saying doctest::Approx
 using doctest::Approx;

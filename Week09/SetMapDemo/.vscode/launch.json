@@ -5,12 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run Program",
+            "name": "Run",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/program.exe",
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "make program.exe",
+            "preLaunchTask": "make",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -26,12 +26,12 @@
             "MIMode": "gdb",
         },
         {
-            "name": "Run Program (Mac)",
+            "name": "Run (Mac)",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/program.exe",
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "make program.exe",
+            "preLaunchTask": "make",
         },
     ]
 }
