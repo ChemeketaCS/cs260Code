@@ -7,10 +7,10 @@
 
 using namespace std;
 
-template<class T>
+template<typename T>
 BSTNode<T>* rotateLeft(BSTNode<T>* parent);
 
-template<class T>
+template<typename T>
 BSTNode<T>* rotateRight(BSTNode<T>* parent);
 
 void testRotateLeft();
@@ -25,13 +25,13 @@ int main() {
   return 0;
 }
 
-template<class T>
+template<typename T>
 BSTNode<T>* rotateLeft(BSTNode<T>* parent) {
   /// TODO - make C pointer to child, do magic, return new parent
   return nullptr;
 }
 
-template<class T>
+template<typename T>
 BSTNode<T>* rotateRight(BSTNode<T>* parent) {
   /// TODO - make C pointer to child, do magic, return new parent
   return nullptr;

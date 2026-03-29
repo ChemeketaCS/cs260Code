@@ -9,7 +9,7 @@ using namespace std;
 #include "LinkedListIterator.h"
 #include "ListNode.h"
 
-template<class T>
+template<typename T>
 class LinkedList {
   // These would normally be private. They are public to enable simpler unit
   // tests.
@@ -45,17 +45,17 @@ public:
 
 ///-----------------------------ITERATOR RELATED-----------------------
 
-template<class T>
+template<typename T>
 LinkedListIterator<T> LinkedList<T>::begin() {
   return LinkedListIterator<T>(head);
 }
 
-template<class T>
+template<typename T>
 LinkedListIterator<T> LinkedList<T>::end() {
   return LinkedListIterator<T>(nullptr);
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::insertAfter(const LinkedListIterator<T>& location,
                                 const T& val) {
   // TODO: Write me
@@ -67,13 +67,13 @@ void LinkedList<T>::insertAfter(const LinkedListIterator<T>& location,
 ///-----------------------------OTHER LINKED LIST
 ///FUNCTIONS-----------------------
 
-template<class T>
+template<typename T>
 LinkedList<T>::LinkedList() {
   head = nullptr;
   tail = nullptr;
 }
 
-template<class T>
+template<typename T>
 LinkedList<T>::~LinkedList() {
   while (head) {
     ListNode<T>* temp = head;
@@ -82,7 +82,7 @@ LinkedList<T>::~LinkedList() {
   }
 }
 
-template<class T>
+template<typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& otherList) {
   head = nullptr;
   tail = nullptr;
@@ -109,7 +109,7 @@ ostream& operator<<(ostream& os, const LinkedList<R>& theList) {
   return os;
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::insertEnd(T value) {
   ListNode<T>* current = new ListNode<T>(value);
   if (head == nullptr) {

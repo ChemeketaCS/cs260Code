@@ -14,7 +14,7 @@ using namespace std;
  * @brief ArrayList implements a list Abstract Data Type using
  *          a dynamic array as the internal storage.
  */
-template<class T>
+template<typename T>
 class ArrayList {
 public:
   ///------------------NEW Iterator Functions-------------------
@@ -144,19 +144,19 @@ protected:
 
 //------------------------IMPLEMENTATIONS-------------------------------
 
-template<class T>
+template<typename T>
 ArrayList<T>::ArrayList(int initialCapacity) {
   length = 0;
   maxSize = initialCapacity;
   list = new T[maxSize];
 }
 
-template<class T>
+template<typename T>
 ArrayList<T>::~ArrayList() {
   delete[] list;
 }
 
-template<class T>
+template<typename T>
 ArrayList<T>::ArrayList(const ArrayList<T>& otherList) {
   length = otherList.length;
   maxSize = otherList.maxSize;
@@ -166,7 +166,7 @@ ArrayList<T>::ArrayList(const ArrayList<T>& otherList) {
     list[i] = otherList.list[i];
 }
 
-template<class T>
+template<typename T>
 ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& otherList) {
   if (this != &otherList) {
     // if we aren't at same address as other guy, do copy
@@ -183,12 +183,12 @@ ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& otherList) {
   return *this;
 }
 
-template<class T>
+template<typename T>
 int ArrayList<T>::listSize() const {
   return length;
 }
 
-template<class T>
+template<typename T>
 void ArrayList<T>::grow() {
   int newSize = maxSize * 2;
   T* tempList = new T[newSize];
@@ -202,7 +202,7 @@ void ArrayList<T>::grow() {
   list = tempList;
 }
 
-template<class T>
+template<typename T>
 void ArrayList<T>::insertEnd(const T& insertItem) {
   if (length == maxSize)
     grow();
@@ -211,7 +211,7 @@ void ArrayList<T>::insertEnd(const T& insertItem) {
   length++;
 }
 
-template<class T>
+template<typename T>
 T ArrayList<T>::retrieveAt(int location) const {
   if (location < 0 || location >= length) {
     // build up error message...
@@ -224,7 +224,7 @@ T ArrayList<T>::retrieveAt(int location) const {
   return list[location];
 }
 
-template<class T>
+template<typename T>
 void ArrayList<T>::replaceAt(int location, const T& repItem) {
   if (location < 0 || location >= length)
     throw out_of_range("Invalid index");
@@ -232,7 +232,7 @@ void ArrayList<T>::replaceAt(int location, const T& repItem) {
   list[location] = repItem;
 }
 
-template<class T>
+template<typename T>
 void ArrayList<T>::removeAt(int location) {
   if (location < 0 || location >= length)
     throw out_of_range("Invalid index");
@@ -245,7 +245,7 @@ void ArrayList<T>::removeAt(int location) {
   length--;
 }
 
-template<class T>
+template<typename T>
 void ArrayList<T>::insertAt(int location, const T& insertItem) {
   if (location < 0 || location > length)
     throw out_of_range("Invalid index");
@@ -264,7 +264,7 @@ void ArrayList<T>::insertAt(int location, const T& insertItem) {
   length++;
 }
 
-template<class T>
+template<typename T>
 int ArrayList<T>::search(const T& searchItem) const {
   for (int i = 0; i < length; i++) {
     if (list[i] == searchItem)

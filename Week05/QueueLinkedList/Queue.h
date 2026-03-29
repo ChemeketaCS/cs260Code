@@ -9,7 +9,7 @@
 
 using namespace std;
 
-template<class T>
+template<typename T>
 class Queue {
 private:
   list<T> storage;
@@ -31,12 +31,12 @@ public:
   }
 };
 
-template<class T>
+template<typename T>
 void Queue<T>::enqueue(const T& value) {
   storage.push_back(value);
 }
 
-template<class T>
+template<typename T>
 T Queue<T>::dequeue() {
   if (empty())
     throw out_of_range("Dequeue on empty queue");
@@ -46,7 +46,7 @@ T Queue<T>::dequeue() {
   return temp;
 }
 
-template<class T>
+template<typename T>
 bool Queue<T>::empty() const {
   return storage.empty();
 }

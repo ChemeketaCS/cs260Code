@@ -1,7 +1,7 @@
 #ifndef LISTNODE_H
 #define LISTNODE_H
 
-template<class T>
+template<typename T>
 struct ListNode {
   T data;
   ListNode* next;

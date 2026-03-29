@@ -8,7 +8,7 @@
 using namespace std;
 
 ///-----------------------------LIST NODE---------------------------------
-template<class T>
+template<typename T>
 struct ListNode {
   T data;
   ListNode* next;
@@ -29,11 +29,11 @@ struct ListNode {
   }
 };
 
-template<class T>
+template<typename T>
 int ListNode<T>::nodeCount = 0;
 
 ///-----------------------------LINKED LIST---------------------------------
-template<class T>
+template<typename T>
 class SimpleLinkedList {
   // Would normally be private. Public to enable simpler unit tests.
 public:
@@ -120,12 +120,12 @@ public:
 
 //-------------------Provided Functions-------------------------
 
-template<class T>
+template<typename T>
 SimpleLinkedList<T>::SimpleLinkedList() {
   head = nullptr;
 }
 
-template<class T>
+template<typename T>
 void SimpleLinkedList<T>::insertStart(const T& value) {
   ListNode<T>* temp = new ListNode<T>(value);
 
@@ -133,13 +133,13 @@ void SimpleLinkedList<T>::insertStart(const T& value) {
   head = temp;       // new node is now head
 }
 
-template<class T>
+template<typename T>
 int SimpleLinkedList<T>::listSize() const {
   // Todo - loop though list and count the number of nodes
   return 0; // fixme
 }
 
-template<class T>
+template<typename T>
 void SimpleLinkedList<T>::print() const {
   // current will point to each element in turn
   ListNode<T>* current = head;
@@ -151,7 +151,7 @@ void SimpleLinkedList<T>::print() const {
   cout << endl;
 }
 
-template<class T>
+template<typename T>
 T SimpleLinkedList<T>::retrieveAt(int index) const {
   if (index < 0)
     throw out_of_range("Index out of range");
@@ -166,7 +166,7 @@ T SimpleLinkedList<T>::retrieveAt(int index) const {
   return current->data;
 }
 
-template<class T>
+template<typename T>
 void SimpleLinkedList<T>::removeAt(int index) {
     // No bounds checking!
 
@@ -187,36 +187,39 @@ void SimpleLinkedList<T>::removeAt(int index) {
 
 //-------------------To be implemented-------------------------
 
-template<class T>
+template<typename T>
 void SimpleLinkedList<T>::insertEnd(const T& value) {
   // TODO - Fixme
 }
 
-template<class T>
+template<typename T>
 void SimpleLinkedList<T>::removeFirst() {
   if (head == nullptr)
     throw out_of_range("Can't remove from empty list");
 
   // TODO - Remove first item in list
+  ListNode<T>* toDelete = head;
+  head = head->next;
+  delete toDelete;
 }
 
-template<class T>
+template<typename T>
 void SimpleLinkedList<T>::insertAt(int index, const T& value) {
   // TODO - Insert value at given location of list
   // index 0 is a special case for insertStart
 }
 
-template<class T>
+template<typename T>
 void SimpleLinkedList<T>::clear() {
   // TODO - delete all nodes and make this into a valid empty list
 }
 
-template<class T>
+template<typename T>
 SimpleLinkedList<T>::~SimpleLinkedList() {
   clear();
 }
 
-template<class T>
+template<typename T>
 SimpleLinkedList<T>::SimpleLinkedList(const SimpleLinkedList<T>& other) {
   // TODO - Write copy constructor...
   // Don't forget to initialize head/tail/length
@@ -224,7 +227,7 @@ SimpleLinkedList<T>::SimpleLinkedList(const SimpleLinkedList<T>& other) {
   assert(0); // blow up for now - remove this
 }
 
-template<class T>
+template<typename T>
 SimpleLinkedList<T>&
 SimpleLinkedList<T>::operator=(const SimpleLinkedList<T>& other) {
   // TODO - Write assignment operator...

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-template<class T>
+template<typename T>
 void print(const T& value) {
   cout << value << " ";
 }

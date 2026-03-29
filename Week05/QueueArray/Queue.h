@@ -11,7 +11,7 @@ using namespace std;
 
 const int QUEUE_INIT_SIZE = 8;
 
-template<class T>
+template<typename T>
 class Queue {
   // Normally would be private, public to enable intrusive unit tests
 public:
@@ -40,7 +40,7 @@ public:
   string toString();
 };
 
-template<class T>
+template<typename T>
 string Queue<T>::toString() {
   stringstream s;
   s << "Start: " << start << " End: " << end << " arraySize: " << arraySize
@@ -61,7 +61,7 @@ string Queue<T>::toString() {
   return s.str();
 }
 
-template<class T>
+template<typename T>
 Queue<T>::Queue() {
   arraySize = QUEUE_INIT_SIZE;
   start = 0;
@@ -69,14 +69,14 @@ Queue<T>::Queue() {
   list = new T[arraySize];
 }
 
-template<class T>
+template<typename T>
 Queue<T>::~Queue() {
   delete[] list;
 }
 
 //-----------Functions to be built------------------
 
-template<class T>
+template<typename T>
 void Queue<T>::enqueue(const T& value) {
   if (full()) {
     grow();
@@ -85,7 +85,7 @@ void Queue<T>::enqueue(const T& value) {
   /// TODO - fixme
 }
 
-template<class T>
+template<typename T>
 T Queue<T>::dequeue() {
   if (empty()) {
     throw out_of_range("Dequeue on empty queue");
@@ -94,7 +94,7 @@ T Queue<T>::dequeue() {
   /// TODO - fixme
 }
 
-template<class T>
+template<typename T>
 bool Queue<T>::empty() const {
   if (end == start)
     return true;
@@ -102,13 +102,13 @@ bool Queue<T>::empty() const {
     return false;
 }
 
-template<class T>
+template<typename T>
 bool Queue<T>::full() const {
   /// TODO - fix this return true or false based on logic
   return false; // replace me
 }
 
-template<class T>
+template<typename T>
 void Queue<T>::grow() {
   /// TODO - allocate new storage, copy over values, update variables, clean up
   /// old storage

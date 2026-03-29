@@ -1,7 +1,7 @@
 #ifndef BSTNODE_H
 #define BSTNODE_H
 
-template<class T>
+template<typename T>
 struct BSTNode {
   /// Store a value and two child pointers
   T value;
@@ -19,10 +19,10 @@ struct BSTNode {
   static int nodeCount;
 };
 
-template<class T>
+template<typename T>
 int BSTNode<T>::nodeCount = 0;
 
-template<class T>
+template<typename T>
 BSTNode<T>::BSTNode(T val) {
   value = val;
   left = nullptr;
@@ -30,7 +30,7 @@ BSTNode<T>::BSTNode(T val) {
   nodeCount++;
 }
 
-template<class T>
+template<typename T>
 BSTNode<T>::~BSTNode() {
   nodeCount--;
 }

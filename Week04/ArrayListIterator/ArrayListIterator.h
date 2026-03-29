@@ -1,7 +1,7 @@
 #ifndef ARRAYLISTITERATOR_H
 #define ARRAYLISTITERATOR_H
 
-template<class T>
+template<typename T>
 class ArrayListIterator {
 private:
   T* currentLoc;

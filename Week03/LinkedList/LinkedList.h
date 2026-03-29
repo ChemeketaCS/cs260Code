@@ -8,7 +8,7 @@
 using namespace std;
 
 ///-----------------------------LIST NODE---------------------------------
-template<class T>
+template<typename T>
 struct ListNode {
   T data;
   ListNode* next;
@@ -29,14 +29,14 @@ struct ListNode {
   }
 };
 
-template<class T>
+template<typename T>
 int ListNode<T>::nodeCount = 0;
 
 ///-----------------------------LINKED LIST---------------------------------
-template<class T>
+template<typename T>
 class LinkedList {
-  // These would normally be private. They are public to enable simpler unit
-  // tests.
+  // These would normally be private. 
+  // They are public to enable simpler unit tests.
 public:
   ListNode<T>* head;
   ListNode<T>* tail;
@@ -59,7 +59,7 @@ public:
   LinkedList& operator=(const LinkedList& other);
 
   /**
-   * @brief Destructor -
+   * @brief Destructor
    */
   ~LinkedList();
 
@@ -70,19 +70,19 @@ public:
 
   /**
    * @brief Inserts given value at head of the list
-   * @param value Integer to insert
+   * @param value Value to insert
    */
   void insertStart(const T& value);
 
   /**
    * @brief Inserts given value at end of the list
-   * @param value Integer to insert
+   * @param value Value to insert
    */
   void insertEnd(const T& value);
 
   /**
    * @brief Remove first item from list
-   *        Throws exception if list is empty
+   * @throw out_of_range if list is empty
    */
   void removeFirst();
 
@@ -94,15 +94,15 @@ public:
   /**
    * @brief Insert given value into list at given location
    * @param index Location to insert value
-   *          Throws exception if invalid
-   * @param value Integer to insert
+   * @throw out_of_range if index is invalid
+   * @param value Value to insert
    */
   void insertAt(int index, const T& value);
 
   /**
    * @brief Remove item at given index from list
    * @param index Location of item to remove
-   *          Throws exception if invalid
+   * @throw out_of_range if index is invalid
    */
   void removeAt(int index);
 
@@ -115,7 +115,7 @@ public:
   /**
    * @brief Gets value stored at specified index
    * @param index Location we want to retrieve from
-   *              Throws excpetion if invalid
+   * @throw out_of_range if index is invalid
    * @return value
    */
   T retrieveAt(int index) const;
@@ -123,14 +123,14 @@ public:
 
 //-------------------Provided Functions-------------------------
 
-template<class T>
+template<typename T>
 LinkedList<T>::LinkedList() {
   head = nullptr;
   tail = nullptr;
   length = 0;
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::insertStart(const T& value) {
   ListNode<T>* temp = new ListNode<T>(value);
 
@@ -144,12 +144,12 @@ void LinkedList<T>::insertStart(const T& value) {
   length++;
 }
 
-template<class T>
+template<typename T>
 int LinkedList<T>::listSize() const {
   return length;
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::print() const {
   // current will point to each element in turn
   ListNode<T>* current = head;
@@ -160,7 +160,7 @@ void LinkedList<T>::print() const {
   }
   cout << endl;
 
-  // Print out some meta data to help with debugging...
+  // Print out some extra info to help with debugging...
   cout << "Length is: " << length << endl;
   if (tail)
     cout << "Tail points at: " << tail->data << endl;
@@ -168,7 +168,7 @@ void LinkedList<T>::print() const {
     cout << "Tail has a nullptr" << endl;
 }
 
-template<class T>
+template<typename T>
 T LinkedList<T>::retrieveAt(int index) const {
   if (index < 0 || index >= length)
     throw out_of_range("Bad index in retrieveAt");
@@ -181,7 +181,7 @@ T LinkedList<T>::retrieveAt(int index) const {
   return current->data;
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::removeAt(int index) {
   if (index < 0 || index >= length)
     throw out_of_range("Bad index in removeAt");
@@ -213,12 +213,12 @@ void LinkedList<T>::removeAt(int index) {
 
 //-------------------To be implemented-------------------------
 
-template<class T>
+template<typename T>
 void LinkedList<T>::insertEnd(const T& value) {
   // TODO - Fixme
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::removeFirst() {
   if (head == nullptr)
     throw out_of_range("Can't remove from empty list");
@@ -226,7 +226,7 @@ void LinkedList<T>::removeFirst() {
   // TODO - Remove first item in list
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::insertAt(int index, const T& value) {
   if (index < 0 || index > length)
     throw out_of_range("Bad insert index");
@@ -234,17 +234,17 @@ void LinkedList<T>::insertAt(int index, const T& value) {
   // index 0 or length are special cases for insertStart/insertEnd
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::clear() {
   // TODO - delete all nodes and make this into a valid empty list
 }
 
-template<class T>
+template<typename T>
 LinkedList<T>::~LinkedList() {
   clear();
 }
 
-template<class T>
+template<typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& other) {
   // TODO - Write copy constructor...
   // Don't forget to initialize head/tail/length
@@ -252,7 +252,7 @@ LinkedList<T>::LinkedList(const LinkedList<T>& other) {
   assert(0); // blow up for now - remove this
 }
 
-template<class T>
+template<typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other) {
   // TODO - Write assignment operator...
   // Don't forget to avoid self assignment

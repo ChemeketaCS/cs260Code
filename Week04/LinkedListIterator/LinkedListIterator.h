@@ -4,10 +4,10 @@
 #include "ListNode.h"
 
 // Forward declare LinkedList so we can make it a friend
-template<class T>
+template<typename T>
 class LinkedList;
 
-template<class T>
+template<typename T>
 class LinkedListIterator {
   // Give LinkedList access to private information
   friend class LinkedList<T>;
@@ -41,13 +41,13 @@ public:
 
 // Return data from the current node
 //  return reference to allow modification
-template<class T>
+template<typename T>
 T& LinkedListIterator<T>::operator*() {
   /// TODO - return data from current node
 }
 
 // Advance iterator position by one
-template<class T>
+template<typename T>
 void LinkedListIterator<T>::operator++() {
   /// TODO - advance the iterator to point at next node in list
 

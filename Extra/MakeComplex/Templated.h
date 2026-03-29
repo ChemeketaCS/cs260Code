@@ -1,7 +1,7 @@
 #ifndef TEMPLATED_H
 #define TEMPLATED_H
 
-template<class T>
+template<typename T>
 T doubleIt(T value) {
   return 2 * value;
 }

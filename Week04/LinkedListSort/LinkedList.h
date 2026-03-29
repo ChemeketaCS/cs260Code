@@ -7,7 +7,7 @@
 using namespace std;
 
 ///-----------------------------LIST NODE---------------------------------
-template<class T>
+template<typename T>
 struct ListNode {
   T data;
   ListNode* next;
@@ -28,11 +28,11 @@ struct ListNode {
   }
 };
 
-template<class T>
+template<typename T>
 int ListNode<T>::nodeCount = 0;
 
 ///-----------------------------LINKED LIST---------------------------------
-template<class T>
+template<typename T>
 class LinkedList {
   // These would normally be private. They are public to enable simpler unit
   // tests.
@@ -94,14 +94,14 @@ public:
 
 ///-----------------------------SORT RELATED-----------------------
 
-template<class T>
+template<typename T>
 void LinkedList<T>::stealContents(LinkedList<T>& otherList) {
   // TODO - FIXME
   // Move all data from otherList to this one
   // Other list ends up empty
 }
 
-template<class T>
+template<typename T>
 LinkedList<T> LinkedList<T>::sliceInHalf() {
   ListNode<T>* cur = head;
   for (int i = 0; i < length / 2 - 1; i++) {
@@ -120,7 +120,7 @@ LinkedList<T> LinkedList<T>::sliceInHalf() {
   return otherList;
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::mergeIn(LinkedList<T>& otherList) {
   // Temporary list we will build up results in
   LinkedList<T> mergeList;
@@ -132,7 +132,7 @@ void LinkedList<T>::mergeIn(LinkedList<T>& otherList) {
   // Steal the data from mergeList back to this list
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::mergeSort() {
   if (this->length <= 1)
     return;
@@ -151,21 +151,21 @@ void LinkedList<T>::mergeSort() {
 ///-----------------------------OTHER LINKED LIST
 ///FUNCTIONS-----------------------
 
-template<class T>
+template<typename T>
 LinkedList<T>::LinkedList() {
   head = nullptr;
   tail = nullptr;
   length = 0;
 }
 
-template<class T>
+template<typename T>
 LinkedList<T>::~LinkedList() {
   while (length > 0) {
     removeStart();
   }
 }
 
-template<class T>
+template<typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& otherList) {
   head = nullptr;
   tail = nullptr;
@@ -193,7 +193,7 @@ ostream& operator<<(ostream& os, const LinkedList<R>& theList) {
   return os;
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::insertEnd(T value) {
   ListNode<T>* current = new ListNode<T>(value);
   if (length == 0) {
@@ -205,7 +205,7 @@ void LinkedList<T>::insertEnd(T value) {
   length++;
 }
 
-template<class T>
+template<typename T>
 T LinkedList<T>::removeStart() {
   if (length == 0) {
     throw out_of_range("Can't removeStart from empty list");
@@ -224,7 +224,7 @@ T LinkedList<T>::removeStart() {
   return value;
 }
 
-template<class T>
+template<typename T>
 T LinkedList<T>::retrieveAt(int index) const {
   if (index < 0 || index >= length)
     throw out_of_range("Bad index in retrieveAt");
