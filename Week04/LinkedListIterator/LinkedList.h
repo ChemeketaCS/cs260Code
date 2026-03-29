@@ -95,7 +95,6 @@ LinkedList<T>::LinkedList(const LinkedList<T>& otherList) {
 
 template<class R>
 ostream& operator<<(ostream& os, const LinkedList<R>& theList) {
-  os << "Size: " << theList.length << " List: ";
   ListNode<R>* current = theList.head;
   while (current != nullptr) {
     os << current->data;

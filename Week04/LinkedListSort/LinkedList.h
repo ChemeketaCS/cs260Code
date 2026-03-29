@@ -39,7 +39,7 @@ class LinkedList {
 public:
   ListNode<T>* head;
   ListNode<T>* tail;
-  int length;
+  int size;
 
 public:
   //-----------New Functions-----------------------
@@ -61,7 +61,7 @@ public:
    *
    * @pre Assumes the list this is called on is empty
    */
-  void stealContents(LinkedList<T>& otherList);
+  void splice(LinkedList<T>& otherList);
 
   /**
    * @brief mergeIn combines otherList into this list to produce one long sorted
@@ -87,15 +87,12 @@ public:
   void insertEnd(T value);
   T removeStart();
   T retrieveAt(int index) const;
-
-  template<class R>
-  friend ostream& operator<<(ostream& os, const LinkedList<R>& theList);
 };
 
 ///-----------------------------SORT RELATED-----------------------
 
 template<typename T>
-void LinkedList<T>::stealContents(LinkedList<T>& otherList) {
+void LinkedList<T>::splice(LinkedList<T>& otherList) {
   // TODO - FIXME
   // Move all data from otherList to this one
   // Other list ends up empty
@@ -104,7 +101,7 @@ void LinkedList<T>::stealContents(LinkedList<T>& otherList) {
 template<typename T>
 LinkedList<T> LinkedList<T>::sliceInHalf() {
   ListNode<T>* cur = head;
-  for (int i = 0; i < length / 2 - 1; i++) {
+  for (int i = 0; i < size / 2 - 1; i++) {
     cur = cur->next;
   }
 
@@ -112,10 +109,10 @@ LinkedList<T> LinkedList<T>::sliceInHalf() {
   LinkedList<T> otherList;
 
   // TODO - FIXME
-  // Set up head, tail and length of other list so it gets
+  // Set up head, tail and size of other list so it gets
   //  everything after the current pointer
   // Update the tail of this list and disconnect it from second half
-  // Update length of both lists
+  // Update size of both lists
 
   return otherList;
 }
@@ -134,7 +131,7 @@ void LinkedList<T>::mergeIn(LinkedList<T>& otherList) {
 
 template<typename T>
 void LinkedList<T>::mergeSort() {
-  if (this->length <= 1)
+  if (this->size <= 1)
     return;
 
   // Split so this list retains first half of the items
@@ -155,12 +152,12 @@ template<typename T>
 LinkedList<T>::LinkedList() {
   head = nullptr;
   tail = nullptr;
-  length = 0;
+  size = 0;
 }
 
 template<typename T>
 LinkedList<T>::~LinkedList() {
-  while (length > 0) {
+  while (size > 0) {
     removeStart();
   }
 }
@@ -169,7 +166,7 @@ template<typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& otherList) {
   head = nullptr;
   tail = nullptr;
-  length = 0;
+  size = 0;
 
   ListNode<T>* currentInOther = otherList.head;
   while (currentInOther != nullptr) {
@@ -177,37 +174,21 @@ LinkedList<T>::LinkedList(const LinkedList<T>& otherList) {
   }
 }
 
-template<class R>
-ostream& operator<<(ostream& os, const LinkedList<R>& theList) {
-  os << "Size: " << theList.length << " List: ";
-  ListNode<R>* current = theList.head;
-  while (current != nullptr) {
-    os << current->data;
-    if (current->next != nullptr)
-      os << ", ";
-    current = current->next;
-  }
-  os << "\t\t(Tail points to: "
-     << (theList.tail ? to_string(theList.tail->data) : "nullptr") << ")";
-  os << endl;
-  return os;
-}
-
 template<typename T>
 void LinkedList<T>::insertEnd(T value) {
   ListNode<T>* current = new ListNode<T>(value);
-  if (length == 0) {
+  if (size == 0) {
     head = current;
   } else {
     tail->next = current;
   }
   tail = current;
-  length++;
+  size++;
 }
 
 template<typename T>
 T LinkedList<T>::removeStart() {
-  if (length == 0) {
+  if (size == 0) {
     throw out_of_range("Can't removeStart from empty list");
   }
 
@@ -216,9 +197,9 @@ T LinkedList<T>::removeStart() {
 
   head = head->next;
   delete nodeToDelete;
-  length--;
+  size--;
 
-  if (length == 0)
+  if (size == 0)
     tail = nullptr;
 
   return value;
@@ -226,7 +207,7 @@ T LinkedList<T>::removeStart() {
 
 template<typename T>
 T LinkedList<T>::retrieveAt(int index) const {
-  if (index < 0 || index >= length)
+  if (index < 0 || index >= size)
     throw out_of_range("Bad index in retrieveAt");
 
   ListNode<T>* current = head;

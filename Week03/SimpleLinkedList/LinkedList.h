@@ -11,7 +11,7 @@ using namespace std;
 template<typename T>
 struct ListNode {
   T data;
-  ListNode* next;
+  ListNode* next = nullptr;
 
   // Maintain a count of active nodes for testing
   //  Not normally a part of the struct.
@@ -20,7 +20,6 @@ struct ListNode {
 
   ListNode(const T& value) {
     data = value;
-    next = nullptr;
     nodeCount++;
   }
 
@@ -37,7 +36,7 @@ template<typename T>
 class SimpleLinkedList {
   // Would normally be private. Public to enable simpler unit tests.
 public:
-  ListNode<T>* head;
+  ListNode<T>* head = nullptr;
 
 public:
   /**
@@ -122,7 +121,7 @@ public:
 
 template<typename T>
 SimpleLinkedList<T>::SimpleLinkedList() {
-  head = nullptr;
+  // Nothing to do since head is already initialized to nullptr
 }
 
 template<typename T>

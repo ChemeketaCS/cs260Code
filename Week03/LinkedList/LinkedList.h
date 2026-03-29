@@ -40,7 +40,7 @@ class LinkedList {
 public:
   ListNode<T>* head;
   ListNode<T>* tail;
-  int length;
+  int size;
 
 public:
   /**
@@ -107,7 +107,7 @@ public:
   void removeAt(int index);
 
   /**
-   * @brief Get the length of the list
+   * @brief Get the size of the list
    * @return int representing number of values (nodes) in list
    */
   int listSize() const;
@@ -127,7 +127,7 @@ template<typename T>
 LinkedList<T>::LinkedList() {
   head = nullptr;
   tail = nullptr;
-  length = 0;
+  size = 0;
 }
 
 template<typename T>
@@ -138,15 +138,15 @@ void LinkedList<T>::insertStart(const T& value) {
   head = temp;       // new node is now head
 
   // if this is the first node, it is tail and head
-  if (length == 0)
+  if (size == 0)
     tail = head;
 
-  length++;
+  size++;
 }
 
 template<typename T>
 int LinkedList<T>::listSize() const {
-  return length;
+  return size;
 }
 
 template<typename T>
@@ -161,7 +161,7 @@ void LinkedList<T>::print() const {
   cout << endl;
 
   // Print out some extra info to help with debugging...
-  cout << "Length is: " << length << endl;
+  cout << "Length is: " << size << endl;
   if (tail)
     cout << "Tail points at: " << tail->data << endl;
   else
@@ -170,7 +170,7 @@ void LinkedList<T>::print() const {
 
 template<typename T>
 T LinkedList<T>::retrieveAt(int index) const {
-  if (index < 0 || index >= length)
+  if (index < 0 || index >= size)
     throw out_of_range("Bad index in retrieveAt");
 
   ListNode<T>* current = head;
@@ -183,7 +183,7 @@ T LinkedList<T>::retrieveAt(int index) const {
 
 template<typename T>
 void LinkedList<T>::removeAt(int index) {
-  if (index < 0 || index >= length)
+  if (index < 0 || index >= size)
     throw out_of_range("Bad index in removeAt");
 
   if (index == 0) {
@@ -208,7 +208,7 @@ void LinkedList<T>::removeAt(int index) {
   if (current->next == nullptr)
     tail = current;
 
-  length--;
+  size--;
 }
 
 //-------------------To be implemented-------------------------
@@ -228,10 +228,10 @@ void LinkedList<T>::removeFirst() {
 
 template<typename T>
 void LinkedList<T>::insertAt(int index, const T& value) {
-  if (index < 0 || index > length)
+  if (index < 0 || index > size)
     throw out_of_range("Bad insert index");
   // TODO - Insert value at given location of list
-  // index 0 or length are special cases for insertStart/insertEnd
+  // index 0 or size are special cases for insertStart/insertEnd
 }
 
 template<typename T>
@@ -247,7 +247,7 @@ LinkedList<T>::~LinkedList() {
 template<typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& other) {
   // TODO - Write copy constructor...
-  // Don't forget to initialize head/tail/length
+  // Don't forget to initialize head/tail/size
 
   assert(0); // blow up for now - remove this
 }

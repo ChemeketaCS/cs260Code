@@ -51,7 +51,7 @@ class DoublyLinkedList {
 public:
   ListNode<T>* head;
   ListNode<T>* tail;
-  int length;
+  int size;
 
 public:
   DoublyLinkedList();
@@ -70,24 +70,21 @@ public:
   void insertAt(int index, const T& value);
   void removeAt(int index);
   T retrieveAt(int index) const;
-
-  template<class R>
-  friend ostream& operator<<(ostream& os, const DoublyLinkedList<R>& theList);
+  
+  void print() const;
 };
 
 ///-----------------------------LINKED LIST FUNCTIONS-----------------------
-template<class R>
-ostream& operator<<(ostream& os, const DoublyLinkedList<R>& theList) {
-  cout << "List: ";
-  ListNode<R>* current = theList.head->next;
-  while (current != theList.tail) {
+template<typename T>
+void DoublyLinkedList<T>::print() const {
+  ListNode<T>* current = head->next;
+  while (current != tail) {
     cout << current->data;
-    if (current->next != theList.tail)
+    if (current->next != tail)
       cout << ", ";
     current = current->next;
   }
   cout << endl;
-  return os;
 }
 
 template<typename T>
@@ -102,7 +99,7 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
 
 template<typename T>
 int DoublyLinkedList<T>::listSize() const {
-  return length;
+  return size;
 }
 
 template<typename T>
@@ -114,12 +111,12 @@ void DoublyLinkedList<T>::insertStart(const T& value) {
   newNode->next->prev = newNode;
   head->next = newNode;
 
-  length++;
+  size++;
 }
 
 template<typename T>
 T DoublyLinkedList<T>::retrieveAt(int index) const {
-  if (index >= length || index < 0)
+  if (index >= size || index < 0)
     throw out_of_range("Bad index in retrieveAt");
 
   // Start at node after dummy
@@ -134,13 +131,12 @@ T DoublyLinkedList<T>::retrieveAt(int index) const {
 ///-----------------------------TODO-----------------------
 template<typename T>
 DoublyLinkedList<T>::DoublyLinkedList() {
-  // TODO - make dummy nodes, attach to each other
-  ListNode<T>* sampleDummy = new ListNode<T>();
+  // TODO - make dummy head/tail nodes and attach them to each other
 }
 
 template<typename T>
 void DoublyLinkedList<T>::removeEnd() {
-  if (length == 0)
+  if (size == 0)
     throw out_of_range("Bad index in removeAt");
 
   // TODO - remove last node in list
@@ -148,7 +144,7 @@ void DoublyLinkedList<T>::removeEnd() {
 
 template<typename T>
 void DoublyLinkedList<T>::insertAt(int index, const T& value) {
-  if (index > length || index < 0)
+  if (index > size || index < 0)
     throw out_of_range("Bad index in insertAt");
   // TODO - implement
 }

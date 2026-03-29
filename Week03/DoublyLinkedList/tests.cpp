@@ -18,7 +18,7 @@ TEST_CASE("DLL/Constructor") {
 
   DoublyLinkedList<int> test_list;
 
-  REQUIRE(test_list.length == 0);
+  REQUIRE(test_list.size == 0);
   REQUIRE(test_list.tail != nullptr);
   REQUIRE(test_list.head != nullptr);
   REQUIRE(test_list.tail->prev == test_list.head);
@@ -38,7 +38,7 @@ TEST_CASE("DLL/removeEnd") {
 
   test_list.removeEnd();
 
-  REQUIRE(test_list.length == 3);
+  REQUIRE(test_list.size == 3);
   REQUIRE(test_list.retrieveAt(0) == 10);
   REQUIRE(test_list.retrieveAt(2) == 30);
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 1);
@@ -46,13 +46,13 @@ TEST_CASE("DLL/removeEnd") {
   test_list.removeEnd();
   test_list.removeEnd();
 
-  REQUIRE(test_list.length == 1);
+  REQUIRE(test_list.size == 1);
   REQUIRE(test_list.retrieveAt(0) == 10);
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 3);
 
   test_list.removeEnd();
 
-  REQUIRE(test_list.length == 0);
+  REQUIRE(test_list.size == 0);
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 4);
 }
 
@@ -64,20 +64,20 @@ TEST_CASE("DLL/insertAt") {
 
   test_list.insertAt(0, 30);
 
-  REQUIRE(test_list.length == 1);
+  REQUIRE(test_list.size == 1);
   REQUIRE(test_list.retrieveAt(0) == 30);
   REQUIRE(ListNode<int>::nodeCount - startNodeCount == 1);
 
   test_list.insertAt(0, 10);
 
-  REQUIRE(test_list.length == 2);
+  REQUIRE(test_list.size == 2);
   REQUIRE(test_list.retrieveAt(0) == 10);
   REQUIRE(test_list.retrieveAt(1) == 30);
   REQUIRE(ListNode<int>::nodeCount - startNodeCount == 2);
 
   test_list.insertAt(1, 20);
 
-  REQUIRE(test_list.length == 3);
+  REQUIRE(test_list.size == 3);
   REQUIRE(test_list.retrieveAt(0) == 10);
   REQUIRE(test_list.retrieveAt(1) == 20);
   REQUIRE(test_list.retrieveAt(2) == 30);

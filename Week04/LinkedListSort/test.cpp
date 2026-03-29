@@ -30,8 +30,8 @@ TEST_CASE("LL/Split") {
 
   LinkedList<int> second_half = test_list.sliceInHalf();
 
-  REQUIRE(test_list.length == 2);
-  REQUIRE(second_half.length == 2);
+  REQUIRE(test_list.size == 2);
+  REQUIRE(second_half.size == 2);
 
   REQUIRE(test_list.tail->data == 6);
   REQUIRE(test_list.tail->next == nullptr);
@@ -50,8 +50,8 @@ TEST_CASE("LL/SplitLonger") {
 
   LinkedList<int> second_half = test_list.sliceInHalf();
 
-  REQUIRE(test_list.length == 3);
-  REQUIRE(second_half.length == 3);
+  REQUIRE(test_list.size == 3);
+  REQUIRE(second_half.size == 3);
 
   REQUIRE(test_list.tail->data == 2);
   REQUIRE(test_list.tail->next == nullptr);
@@ -67,8 +67,8 @@ TEST_CASE("LL/SplitOddSize") {
 
   LinkedList<int> second_half = test_list.sliceInHalf();
 
-  REQUIRE(test_list.length == 2);
-  REQUIRE(second_half.length == 3);
+  REQUIRE(test_list.size == 2);
+  REQUIRE(second_half.size == 3);
 
   REQUIRE(test_list.tail->data == 6);
   REQUIRE(test_list.tail->next == nullptr);
@@ -77,12 +77,12 @@ TEST_CASE("LL/SplitOddSize") {
   REQUIRE(second_half.tail->data == 50);
 }
 
-TEST_CASE("LL/StealAllOf") {
+TEST_CASE("LL/splice") {
   LinkedList<int> test_list;
   buildTestIntList(test_list); // 5, 6, 2, 4
 
   LinkedList<int> test_list2;
-  test_list2.stealContents(test_list);
+  test_list2.splice(test_list);
 
   REQUIRE(test_list2.head->data == 5);
   REQUIRE(test_list2.tail->data == 4);
@@ -90,8 +90,8 @@ TEST_CASE("LL/StealAllOf") {
   REQUIRE(test_list.head == nullptr);
   REQUIRE(test_list.tail == nullptr);
 
-  REQUIRE(test_list.length == 0);
-  REQUIRE(test_list2.length == 4);
+  REQUIRE(test_list.size == 0);
+  REQUIRE(test_list2.size == 4);
 }
 
 TEST_CASE("LL/Merge") {
@@ -106,8 +106,8 @@ TEST_CASE("LL/Merge") {
 
   test_list.mergeIn(test_list2);
 
-  REQUIRE(test_list.length == 4);
-  REQUIRE(test_list2.length == 0);
+  REQUIRE(test_list.size == 4);
+  REQUIRE(test_list2.size == 0);
 
   REQUIRE(test_list.retrieveAt(0) == 5);
   REQUIRE(test_list.retrieveAt(1) == 10);
@@ -134,8 +134,8 @@ TEST_CASE("LL/Merge2") {
 
   test_list.mergeIn(test_list2);
 
-  REQUIRE(test_list.length == 5);
-  REQUIRE(test_list2.length == 0);
+  REQUIRE(test_list.size == 5);
+  REQUIRE(test_list2.size == 0);
 
   REQUIRE(test_list.retrieveAt(0) == 5);
   REQUIRE(test_list.retrieveAt(1) == 10);
@@ -163,8 +163,8 @@ TEST_CASE("LL/Merge3") {
 
   test_list.mergeIn(test_list2);
 
-  REQUIRE(test_list.length == 5);
-  REQUIRE(test_list2.length == 0);
+  REQUIRE(test_list.size == 5);
+  REQUIRE(test_list2.size == 0);
 
   REQUIRE(test_list.retrieveAt(0) == 5);
   REQUIRE(test_list.retrieveAt(1) == 10);
