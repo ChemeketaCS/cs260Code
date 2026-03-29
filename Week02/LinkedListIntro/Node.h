@@ -10,7 +10,8 @@ public:
   Node* next = nullptr;
 
   // Node must be constructed with a value - stored as element
-  Node(T value): element(value) {
+  Node(T value) {
+    element = value;
   }
 };
 
