@@ -11,6 +11,9 @@ CXXFLAGS = -g -Wall -Wextra
 CXXFLAGS += -std=c++20 -fmodules-ts -pedantic -pedantic-errors
 CXXFLAGS += -Wfloat-equal -Wredundant-decls -Wshadow -Wconversion -Wuninitialized
 
+# search for .h files two levels up to allow for shared headers in the root directory
+CXXFLAGS = -I../.. 
+
 # list .h files here
 HEADERS =
 
