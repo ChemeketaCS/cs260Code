@@ -24,8 +24,14 @@ int main() {
   node2->next = node3;
 
   cout << node1->element << endl;
-  cout << node1->next->element << endl;
+  cout << node1->next << endl;
   cout << node1->next->next->element << endl;
+
+  Node<int>* current = node1;
+  while (current != nullptr) {
+    cout << current->element << endl;
+    current = current->next;
+  }
 
   // Clean up all the nodes
   delete node3;

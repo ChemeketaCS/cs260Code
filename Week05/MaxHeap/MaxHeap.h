@@ -39,8 +39,8 @@ public:
   ~MaxHeap();
 
   // Copy ctor declared, not implemented unless needed
-  MaxHeap(const MaxHeap& other);
-  MaxHeap& operator=(const MaxHeap& other);
+  MaxHeap(const MaxHeap& other) = delete;
+  MaxHeap& operator=(const MaxHeap& other) = delete;
 
   // Convert to a string representation
   std::string toString() const;

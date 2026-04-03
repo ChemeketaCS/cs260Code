@@ -3,8 +3,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-
-
 // Use Approx from doctest without saying doctest::Approx
 using doctest::Approx;
 
@@ -29,8 +27,8 @@ void buildTestHeap(MaxHeap<int>& h) {
   delete[] h.data;
   h.heapSize = 6;
   h.capacity = 32;
-  // Intentionally has extra 100... not technically part of heap
-  h.data = new int[32]{100, 50, 60, 30, 20, 10, 100};
+  // Intentionally has extra 200... not considered part of heap
+  h.data = new int[32]{100, 50, 60, 30, 20, 10, 200};
 }
 
 TEST_CASE("largestChildIndex") {
@@ -46,7 +44,7 @@ TEST_CASE("largestChildIndex") {
   REQUIRE(h.largestChildIndex(5) == -1);
 }
 
-TEST_CASE("addTestOne") {
+TEST_CASE("addTest1") {
   MaxHeap<int> h;
   buildTestHeap(h); // 100 50 60 30 20 10
 
@@ -58,7 +56,7 @@ TEST_CASE("addTestOne") {
   REQUIRE(h.data[6] == 15);
 }
 
-TEST_CASE("addTestTwo") {
+TEST_CASE("addTest2") {
   MaxHeap<int> h;
   buildTestHeap(h); // 100 50 60 30 20 10
 
@@ -70,7 +68,7 @@ TEST_CASE("addTestTwo") {
   REQUIRE(h.data[6] == 60);
 }
 
-TEST_CASE("addTestTwo") {
+TEST_CASE("addTest3") {
   MaxHeap<int> h;
   buildTestHeap(h); // 100 50 60 30 20 10
 
@@ -84,7 +82,7 @@ TEST_CASE("addTestTwo") {
   REQUIRE(h.data[7] == 30);
 }
 
-TEST_CASE("addTestThree") {
+TEST_CASE("addTest4") {
   MaxHeap<int> h;
   buildTestHeap(h); // 100 50 60 30 20 10
 
@@ -101,7 +99,7 @@ TEST_CASE("addTestThree") {
   REQUIRE(h.data[9] == 20);
 }
 
-TEST_CASE("removeOne") {
+TEST_CASE("remove1") {
   MaxHeap<int> h;
   buildTestHeap(h); // 100 50 60 30 20 10
 
@@ -114,7 +112,7 @@ TEST_CASE("removeOne") {
   REQUIRE(h.heapSize == 5);
 }
 
-TEST_CASE("removeTwo") {
+TEST_CASE("remove2") {
   MaxHeap<int> h;
   buildTestHeap(h); // 100 50 60 30 20 10
 

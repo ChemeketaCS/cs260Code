@@ -1,9 +1,13 @@
 # force macs to use g++-15 to avoid clang mapped to g++
-OS_NAME := $(shell uname -s)
-ifeq ($(OS_NAME),Darwin)
-	CXX = g++-15
-else
+ifeq ($(OS),Windows_NT)
 	CXX = g++
+else
+	OS_NAME := $(shell uname -s)
+	ifeq ($(OS_NAME),Darwin)
+		CXX = g++-15
+	else
+		CXX = g++
+	endif
 endif
 
 # compiler options
