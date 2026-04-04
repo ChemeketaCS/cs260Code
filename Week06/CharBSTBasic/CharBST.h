@@ -9,13 +9,16 @@ class CharBST {
   // Would normally be private.
   // Made public to allow intrusive unit tests.
 public:
-  BSTNode<char>* root;
+  BSTNode* root;
 
 public:
   /// Constructor - root inited to null
   CharBST();
   /// Destructor - deletes any child nodes
   ~CharBST();
+
+  /// return true if no values in tree
+  bool isEmpty();
 
   /// Produce an in order string representation
   std::string toString() const;
@@ -28,6 +31,11 @@ public:
   void insertRecursive(char val);
   void insertIterative(char val);
 
+  /// remove indicated char from tree
+  void remove(char val);
+  /// remove the smallest value from the tree
+  void removeSmallest();
+  
   /// Disable copy/assignment - these are declared but not defined
   CharBST(const CharBST& val);
   CharBST& operator=(const CharBST& val);
