@@ -3,19 +3,30 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-
-
 // Use Approx from doctest without saying doctest::Approx
 using doctest::Approx;
 
 #include "CharBST.h"
 
-// Declare  functions from the .cpp file so that we can directly test them
-BSTNode<char>* rotateLeft(BSTNode<char>* parent);
-BSTNode<char>* rotateRight(BSTNode<char>* parent);
-int getHeight(BSTNode<char>* node);
-int getBalance(BSTNode<char>* node);
-int getSubtreeSize(BSTNode<char>* node);
+BSTNode* rotateLeft(BSTNode* parent) {
+  /// TODO - fixme
+  return nullptr;
+}
+
+BSTNode* rotateRight(BSTNode* parent) {
+  /// TODO - fixme
+  return nullptr;
+}
+
+int getHeight(BSTNode* node) {
+  // TODO - fixme
+  return -1;
+}
+
+int getBalance(BSTNode* node) {
+  // TODO - fixme
+  return -1;
+}
 
 using namespace std;
 
@@ -32,25 +43,25 @@ using namespace std;
 void insertTestData(CharBST& c) {
   c.root = nullptr; // remove (and leak!!!) any existing nodes
 
-  c.root = new BSTNode<char>('G');
+  c.root = new BSTNode('G');
 
-  c.root->left = new BSTNode<char>('C');
-  c.root->left->left = new BSTNode<char>('B');
-  c.root->left->right = new BSTNode<char>('F');
+  c.root->left = new BSTNode('C');
+  c.root->left->left = new BSTNode('B');
+  c.root->left->right = new BSTNode('F');
 
-  c.root->right = new BSTNode<char>('P');
-  c.root->right->right = new BSTNode<char>('Y');
-  c.root->right->left = new BSTNode<char>('J');
-  c.root->right->left->right = new BSTNode<char>('M');
+  c.root->right = new BSTNode('P');
+  c.root->right->right = new BSTNode('Y');
+  c.root->right->left = new BSTNode('J');
+  c.root->right->left->right = new BSTNode('M');
 }
 
 TEST_CASE("RotateRightAtC") {
   CharBST bst;
   insertTestData(bst);
 
-  BSTNode<char>* target = bst.root->left;
+  BSTNode* target = bst.root->left;
 
-  BSTNode<char>* newParent = rotateRight(target);
+  BSTNode* newParent = rotateRight(target);
 
   REQUIRE(newParent->value == 'B');
   REQUIRE(newParent->right->value == 'C');
@@ -61,53 +72,39 @@ TEST_CASE("RotateRightAtG") {
   CharBST bst;
   insertTestData(bst);
 
-  BSTNode<char>* target = bst.root;
+  BSTNode* target = bst.root;
 
-  BSTNode<char>* newParent = rotateRight(target);
+  BSTNode* newParent = rotateRight(target);
 
   REQUIRE(newParent->value == 'C');
   REQUIRE(newParent->right->value == 'G');
   REQUIRE(newParent->right->left->value == 'F');
 }
 
-TEST_CASE("RotateLAtC") {
+TEST_CASE("RotateLeftAtC") {
   CharBST bst;
   insertTestData(bst);
 
-  BSTNode<char>* target = bst.root->left;
+  BSTNode* target = bst.root->left;
 
-  BSTNode<char>* newParent = rotateLeft(target);
+  BSTNode* newParent = rotateLeft(target);
 
   REQUIRE(newParent->value == 'F');
   REQUIRE(newParent->left->value == 'C');
   REQUIRE(newParent->left->right == nullptr);
 }
 
-TEST_CASE("RotateRightAtG") {
+TEST_CASE("RotateLeftAtG") {
   CharBST bst;
   insertTestData(bst);
 
-  BSTNode<char>* target = bst.root;
+  BSTNode* target = bst.root;
 
-  BSTNode<char>* newParent = rotateLeft(target);
+  BSTNode* newParent = rotateLeft(target);
 
   REQUIRE(newParent->value == 'P');
   REQUIRE(newParent->left->value == 'G');
   REQUIRE(newParent->left->right->value == 'J');
-}
-
-TEST_CASE("Size") {
-  CharBST bst;
-  insertTestData(bst);
-
-  int FSize = getSubtreeSize(bst.root->left->right);
-  REQUIRE(FSize == 1);
-
-  int JSize = getSubtreeSize(bst.root->right->left);
-  REQUIRE(JSize == 2);
-
-  int fullSize = getSubtreeSize(bst.root);
-  REQUIRE(fullSize == 8);
 }
 
 TEST_CASE("Height") {

@@ -1,39 +1,45 @@
 #ifndef CHARBST_H
 #define CHARBST_H
 
+#include <string>
+
 #include "BSTNode.h"
 
 class CharBST {
-public: /// Public to allow testing of helper functions outside the class
-  BSTNode<char>* root;
-
-  /// Helper function for cleaning up memory
-  void deleteSubTree(BSTNode<char>* startNode);
-
-  /**
-   * @brief rotateLeft rotates the parent to the left, pulling up right child
-   * @return the newly promoted parent node
-   */
-  BSTNode<char>* rotateLeft(BSTNode<char>* parent);
-
-  /**
-   * @brief rotateRight rotates the parent to the right, pulling up left child
-   * @return the newly promoted parent node
-   */
-  BSTNode<char>* rotateRight(BSTNode<char>* parent);
+  // Would normally be private.
+  // Made public to allow intrusive unit tests.
+public:
+  BSTNode* root;
 
 public:
-  /// Constructors/assignment op
+  /// Constructor - root inited to null
   CharBST();
-  CharBST(const CharBST& other);
-  CharBST& operator=(const CharBST& other);
   /// Destructor - deletes any child nodes
   ~CharBST();
 
-  /// in order print
-  void print();
+  // copy/assignment
+  CharBST(const CharBST& val);
+  CharBST& operator=(const CharBST& val);
 
-  void splay();
+  /// return true if no values in tree
+  bool isEmpty();
+
+  /// Produce an in order string representation
+  std::string toString() const;
+
+  /// check if value is present
+  bool containsRecursive(char val) const;
+  bool containsIterative(char val) const;
+
+  /// add (a possibly duplicate) value to tree
+  void insertRecursive(char val);
+  void insertIterative(char val);
+
+  /// remove indicated char from tree
+  void remove(char val);
+  /// remove the smallest value from the tree
+  void removeSmallest();
+
 };
 
 #endif // CHARBST_H

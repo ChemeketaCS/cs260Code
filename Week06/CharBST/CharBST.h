@@ -17,6 +17,10 @@ public:
   /// Destructor - deletes any child nodes
   ~CharBST();
 
+  // copy/assignment
+  CharBST(const CharBST& val);
+  CharBST& operator=(const CharBST& val);
+
   /// return true if no values in tree
   bool isEmpty();
 
@@ -35,10 +39,7 @@ public:
   void remove(char val);
   /// remove the smallest value from the tree
   void removeSmallest();
-  
-  /// Disable copy/assignment - these are declared but not defined
-  CharBST(const CharBST& val);
-  CharBST& operator=(const CharBST& val);
+
 };
 
 #endif // CHARBST_H
