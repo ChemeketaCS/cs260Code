@@ -6,8 +6,7 @@
 // Use Approx from doctest without saying doctest::Approx
 using doctest::Approx;
 
-#include "LinkedList.h"
-// #include "code.cpp"     //Your code in cpplab
+#include "SimpleLinkedList.h"
 
 using namespace std;
 
@@ -17,26 +16,6 @@ void buildTestIntList(SimpleLinkedList<int>& list) {
   list.insertStart(3);
   list.insertStart(2);
   list.insertStart(1);
-}
-
-TEST_CASE("LL/InsertEnd") {
-  SimpleLinkedList<int> test_list;
-  buildTestIntList(test_list); // 1, 2, 3
-
-  test_list.insertEnd(10);
-  REQUIRE(test_list.retrieveAt(3) == 10);
-
-  test_list.insertEnd(20);
-  REQUIRE(test_list.retrieveAt(4) == 20);
-}
-
-TEST_CASE("LL/InsertEndEmptyList") {
-  SimpleLinkedList<int> test_list;
-
-  test_list.insertEnd(10);
-  REQUIRE(test_list.head != nullptr); // check head pointer
-  REQUIRE(test_list.retrieveAt(0) == 10);
-  REQUIRE(test_list.head->data == 10);      // check head pointer
 }
 
 TEST_CASE("LL/RemoveFirst") {

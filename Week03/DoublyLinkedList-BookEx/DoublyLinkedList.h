@@ -142,11 +142,11 @@ void DoublyLinkedList<T>::removeEnd() {
   // TODO - remove last node in list
 }
 
-template<typename T>
-void DoublyLinkedList<T>::insertAt(int index, const T& value) {
-  if (index > size || index < 0)
-    throw out_of_range("Bad index in insertAt");
-  // TODO - implement
-}
+// template<typename T>
+// void DoublyLinkedList<T>::insertAt(int index, const T& value) {
+//   if (index > size || index < 0)
+//     throw out_of_range("Bad index in insertAt");
+//   // TODO - implement
+// }
 
 #endif // DOUBLYLINKEDLIST_H

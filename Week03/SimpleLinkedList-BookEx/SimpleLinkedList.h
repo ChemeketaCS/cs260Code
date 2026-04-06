@@ -167,29 +167,24 @@ T SimpleLinkedList<T>::retrieveAt(int index) const {
 
 template<typename T>
 void SimpleLinkedList<T>::removeAt(int index) {
-    // No bounds checking!
+  // No bounds checking!
 
-    // First item is special case... use removeFirst for it
-    if(index == 0) {
-        removeFirst();
-        return;
-    }
-    ListNode<T>* current = head;
-    // Move current to the node before the desired index
-    for(int i = 0; i < index - 1; i++) {
-        current = current->next;
-    }
-    ListNode<T>* toDelete = current->next;
-    current->next = toDelete->next;
-    delete toDelete;
+  // First item is special case... use removeFirst for it
+  if (index == 0) {
+    removeFirst();
+    return;
+  }
+  ListNode<T>* current = head;
+  // Move current to the node before the desired index
+  for (int i = 0; i < index - 1; i++) {
+    current = current->next;
+  }
+  ListNode<T>* toDelete = current->next;
+  current->next = toDelete->next;
+  delete toDelete;
 }
 
 //-------------------To be implemented-------------------------
-
-template<typename T>
-void SimpleLinkedList<T>::insertEnd(const T& value) {
-  // TODO - Fixme
-}
 
 template<typename T>
 void SimpleLinkedList<T>::removeFirst() {
@@ -197,9 +192,6 @@ void SimpleLinkedList<T>::removeFirst() {
     throw out_of_range("Can't remove from empty list");
 
   // TODO - Remove first item in list
-  ListNode<T>* toDelete = head;
-  head = head->next;
-  delete toDelete;
 }
 
 template<typename T>
