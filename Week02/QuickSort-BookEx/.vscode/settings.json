@@ -1,0 +1,17 @@
+{
+    "lldb.dereferencePointers": false,
+    "editor.tabSize": 2,
+    "gitdoc.autoPull": "off",
+    "gitdoc.autoPush": "off",
+    "gitdoc.commitValidationLevel": "none",
+    "gitdoc.enabled": false,
+    "gitdoc.filePattern": "{**/*.h*,**/*.c*,**/Makefile}",
+    "gitdoc.pullOnOpen": false,
+    "gitdoc.autoCommitDelay": 10000,
+    "editor.formatOnSave": true,
+    "debug.onTaskErrors": "showErrors",
+    "extensions.ignoreRecommendations": true,
+    "workbench.remoteIndicator.showExtensionRecommendations": false,
+    "chat.disableAIFeatures": true,
+    "C_Cpp.debugShortcut": false
+}
