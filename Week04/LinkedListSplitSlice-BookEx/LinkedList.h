@@ -109,40 +109,8 @@ LinkedList<T> LinkedList<T>::sliceInHalf() {
   LinkedList<T> otherList;
 
   // TODO - FIXME
-  // Set up head, tail and size of other list so it gets
-  //  everything after the current pointer
-  // Update the tail of this list and disconnect it from second half
-  // Update size of both lists
 
   return otherList;
-}
-
-template<typename T>
-void LinkedList<T>::mergeIn(LinkedList<T>& otherList) {
-  // Temporary list we will build up results in
-  LinkedList<T> mergeList;
-
-  // TODO:
-  // Merge this and otherList into mergeList
-  //  by moving one value at a time to it.
-
-  // Steal the data from mergeList back to this list
-}
-
-template<typename T>
-void LinkedList<T>::mergeSort() {
-  if (this->size <= 1)
-    return;
-
-  // Split so this list retains first half of the items
-  //  and secondList contains the rest of of them
-  LinkedList<T> secondList = this->sliceInHalf();
-
-  this->mergeSort();      // sort first half
-  secondList.mergeSort(); // sort second half
-
-  // Combine them back into one list
-  this->mergeIn(secondList);
 }
 
 ///-----------------------------OTHER LINKED LIST

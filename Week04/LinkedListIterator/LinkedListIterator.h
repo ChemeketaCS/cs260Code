@@ -3,58 +3,35 @@
 
 #include "ListNode.h"
 
-// Forward declare LinkedList so we can make it a friend
-template<typename T>
-class LinkedList;
-
-template<typename T>
-class LinkedListIterator {
-  // Give LinkedList access to private information
-  friend class LinkedList<T>;
-
+template <typename T>
+class ListIterator {
 private:
-  ListNode<T>* currentNode;
-
+    ListNode<T>* currentNode;
 public:
-  // Constructor - takes pointer to ListNode
-  LinkedListIterator(ListNode<T>* const location) {
-    currentNode = location;
-  }
+    // Constructor to initialize the iterator that starts at a given node
+    ListIterator(ListNode<T>* startNode) {
+        currentNode = startNode;
+    }
 
-  // Compare two iterators with ==
-  bool operator==(const LinkedListIterator& other) const {
-    return currentNode == other.currentNode;
-  }
+    // Returns a reference to the element at the current position
+    T& operator*() {
+        return currentNode->element;
+    }
 
-  // Compare two iterators with !=
-  bool operator!=(const LinkedListIterator& other) const {
-    return currentNode != other.currentNode;
-  }
+    // Advances the iterator to the next position
+    ListIterator& operator++() {
+        currentNode = currentNode->next;
+        return *this;
+    }
 
-  // Return data from the current node
-  //  return reference to allow modification
-  T& operator*();
+    // Compare two iterators for equality/inequality
+    bool operator==(const ListIterator& other) const {
+        return currentNode == other.currentNode;
+    }
 
-  // Advance iterator position by one
-  void operator++();
+    bool operator!=(const ListIterator& other) const {
+        return currentNode != other.currentNode;
+    }
 };
-
-// Return data from the current node
-//  return reference to allow modification
-template<typename T>
-T& LinkedListIterator<T>::operator*() {
-  /// TODO - return data from current node
-}
-
-// Advance iterator position by one
-template<typename T>
-void LinkedListIterator<T>::operator++() {
-  /// TODO - advance the iterator to point at next node in list
-
-  // Note: Operator ++ can also be implemented to return the current object by
-  // reference
-  //       for use in a more complex expression. To do, return type would be
-  //       "LinkedListIterator<T>&" and last line would be "return *this;"
-}
 
 #endif // LINKEDLISTITERATOR_H

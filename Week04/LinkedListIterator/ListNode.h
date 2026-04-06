@@ -3,11 +3,11 @@
 
 template<typename T>
 struct ListNode {
-  T data;
+  T element;
   ListNode* next;
 
   ListNode(T value) {
-    data = value;
+    element = value;
     next = nullptr;
   }
 };

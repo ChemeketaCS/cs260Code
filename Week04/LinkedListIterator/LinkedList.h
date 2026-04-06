@@ -8,74 +8,41 @@ using namespace std;
 
 #include "LinkedListIterator.h"
 #include "ListNode.h"
-
 template<typename T>
 class LinkedList {
-  // These would normally be private. They are public to enable simpler unit
-  // tests.
+private:
+  ListNode<T>* head = nullptr; // Pointer to the first node in the list
+  ListNode<T>* tail = nullptr; // Pointer to the last node in the list
 public:
-  ListNode<T>* head;
-  ListNode<T>* tail;
-
-public:
-  /// New Functions:
-  // Get an iterator that points to head
-  LinkedListIterator<T> begin();
-  // Get an iterator that points to null (one step past tail)
-  LinkedListIterator<T> end();
-
-  // Inserts a value after the given iterator
-  void insertAfter(const LinkedListIterator<T>& location, const T& value);
-
-  //-----------Other functions------------------------
   LinkedList();
   ~LinkedList();
-  LinkedList(const LinkedList<T>& otherList);
 
-  // declared but not implemented:
-  LinkedList<T>& operator=(const LinkedList<T>& otherList);
+  LinkedList(const LinkedList&) = delete;
+  LinkedList& operator=(const LinkedList&) = delete;
 
-  void insertEnd(T value);
-  T removeStart();
-  T retrieveAt(int index) const;
+  void insertFront(T value);
 
-  template<class R>
-  friend ostream& operator<<(ostream& os, const LinkedList<R>& theList);
+  ListIterator<T> begin();
+  ListIterator<T> end();
 };
 
-///-----------------------------ITERATOR RELATED-----------------------
-
 template<typename T>
-LinkedListIterator<T> LinkedList<T>::begin() {
-  return LinkedListIterator<T>(head);
+ListIterator<T> LinkedList<T>::begin() {
+  return ListIterator<T>(head);
 }
 
 template<typename T>
-LinkedListIterator<T> LinkedList<T>::end() {
-  return LinkedListIterator<T>(nullptr);
+ListIterator<T> LinkedList<T>::end() {
+  return ListIterator<T>(nullptr);
 }
 
 template<typename T>
-void LinkedList<T>::insertAfter(const LinkedListIterator<T>& location,
-                                const T& val) {
-  // TODO: Write me
-  // Need to make a new node and correctly insert it after the node that
-  // location
-  //  is keeping track of
-}
-
-///-----------------------------OTHER LINKED LIST
-///FUNCTIONS-----------------------
-
-template<typename T>
-LinkedList<T>::LinkedList() {
-  head = nullptr;
-  tail = nullptr;
+LinkedList<T>::LinkedList(): head(nullptr), tail(nullptr) {
 }
 
 template<typename T>
 LinkedList<T>::~LinkedList() {
-  while (head) {
+  while (head != nullptr) {
     ListNode<T>* temp = head;
     head = head->next;
     delete temp;
@@ -83,40 +50,13 @@ LinkedList<T>::~LinkedList() {
 }
 
 template<typename T>
-LinkedList<T>::LinkedList(const LinkedList<T>& otherList) {
-  head = nullptr;
-  tail = nullptr;
-
-  ListNode<T>* currentInOther = otherList.head;
-  while (currentInOther != nullptr) {
-    this->insertEnd(currentInOther->data);
+void LinkedList<T>::insertFront(T value) {
+  ListNode<T>* newNode = new ListNode<T>(value);
+  newNode->next = head;
+  head = newNode;
+  if (tail == nullptr) {
+    tail = newNode;
   }
-}
-
-template<class R>
-ostream& operator<<(ostream& os, const LinkedList<R>& theList) {
-  ListNode<R>* current = theList.head;
-  while (current != nullptr) {
-    os << current->data;
-    if (current->next != nullptr)
-      os << ", ";
-    current = current->next;
-  }
-  os << "\t\t(Tail points to: "
-     << (theList.tail ? to_string(theList.tail->data) : "nullptr") << ")";
-  os << endl;
-  return os;
-}
-
-template<typename T>
-void LinkedList<T>::insertEnd(T value) {
-  ListNode<T>* current = new ListNode<T>(value);
-  if (head == nullptr) {
-    head = current;
-  } else {
-    tail->next = current;
-  }
-  tail = current;
 }
 
 #endif
