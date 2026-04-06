@@ -111,7 +111,7 @@ bool Queue<T>::full() const {
 template<typename T>
 void Queue<T>::grow() {
   /// TODO - allocate new storage, copy over values, update variables, clean up
-  /// old storage
+  ///        old storage
   throw logic_error("Not implemented");
 }
 

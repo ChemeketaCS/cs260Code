@@ -88,13 +88,20 @@ T MaxHeap<T>::getMax() {
   return data[0];
 }
 
+  // Gets the index of the largest child of the specified location
+  //  Returns -1 if there are no children
 template<typename T>
 int MaxHeap<T>::largestChildIndex(int current) const {
   /// TODO
-  ///  If there are no valid children, return -1
-  ///  If only a left child, return its index
-  ///  Otherwise, return index of the larger of the two children
   return -1; // remove this
+}
+
+template<typename T>
+void MaxHeap<T>::add(const T& value) {
+  if (heapSize == capacity)
+    grow();
+
+  /// TODO
 }
 
 template<typename T>
@@ -103,19 +110,6 @@ T MaxHeap<T>::removeMax() {
     throw std::logic_error("removeTop in empty heap");
 
   /// TODO
-  ///  Swap first and last elements and reduce size
-  ///  Until the promoted value is in valid location, swap it with largest child
-  ///  Return old first element
-}
-
-template<typename T>
-void MaxHeap<T>::add(const T& value) {
-  if (heapSize == capacity)
-    grow();
-
-  /// TODO - add to bottom of heap
-  ///  then swap our way up until current location is root
-  ///  and increase logical size of heap
 }
 
 #endif // MAXHEAP_H
