@@ -5,13 +5,13 @@ template<typename T>
 class Node {
 public:
   // Value stored in this node
-  T element;
+  int data;
   // Next node in list (nullptr == end of list)
-  Node* next = nullptr;
+  ListNode* next = nullptr;
 
-  // Node must be constructed with a value - stored as element
-  Node(T value) {
-    element = value;
+  // Node must be constructed with a value - stored as data
+  Node(int value) {
+    data = value;
   }
 };
 

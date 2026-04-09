@@ -1,35 +1,35 @@
 #include <iostream>
 
-template<typename T>
-class Node {
-public:
+struct ListNode {
   // Value stored in this node
-  T element;
-  // Next node in list (nullptr == end of list)
-  Node* next = nullptr;
+  int data = 0;
 
-  // Node must be constructed with a value - stored as element
-  Node(T value): element(value) {
+  // Next node in list (nullptr == end of list)
+  ListNode* next = nullptr;
+
+  // Constructor
+  ListNode(int value) {
+    data = value;
   }
 };
 
 using namespace std;
 
 int main() {
-  Node<int>* node1 = new Node<int>(10);
-  Node<int>* node2 = new Node<int>(15);
-  Node<int>* node3 = new Node<int>(20);
+  ListNode* node1 = new ListNode(12);
+  ListNode* node2 = new ListNode(6);
+  ListNode* node3 = new ListNode(10);
 
   node1->next = node2;
   node2->next = node3;
 
-  cout << node1->element << endl;
-  cout << node1->next << endl;
-  cout << node1->next->next->element << endl;
+  cout << node1->data << endl;
+  cout << node1->next->data << endl;
+  cout << node1->next->next->data << endl;
 
-  Node<int>* current = node1;
+  ListNode* current = node1;
   while (current != nullptr) {
-    cout << current->element << endl;
+    cout << current->data << endl;
     current = current->next;
   }
 
