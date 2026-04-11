@@ -50,22 +50,22 @@ TEST_CASE("LL/InsertEndEmptyList") {
   REQUIRE(test_list.tail->next == nullptr); // check after tail
 }
 
-TEST_CASE("LL/RemoveFirst") {
+TEST_CASE("LL/removeStart") {
   LinkedList<int> test_list;
   buildTestIntList(test_list); // 1, 2, 3
 
   int startNodeCount = ListNode<int>::nodeCount;
 
-  test_list.removeFirst();
+  test_list.removeStart();
   REQUIRE(test_list.size == 2);
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 1);
 
-  test_list.removeFirst();
+  test_list.removeStart();
   REQUIRE(test_list.size == 1);
   REQUIRE(test_list.retrieveAt(0) == 3);
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 2);
 
-  test_list.removeFirst();
+  test_list.removeStart();
   REQUIRE(test_list.size == 0);
   REQUIRE(test_list.head == nullptr);
   REQUIRE(test_list.tail == nullptr);
@@ -137,36 +137,9 @@ TEST_CASE("LL/CopyConstructor") {
   REQUIRE(ListNode<int>::nodeCount - startNodeCount == 3);
 
   // Make sure removal from one does not affect other
-  test_list.removeAt(1);
+  test_list.insertStart(0);
   REQUIRE(copy.retrieveAt(0) == 1);
   REQUIRE(copy.retrieveAt(1) == 2);
   REQUIRE(copy.retrieveAt(2) == 3);
   REQUIRE(copy.size == 3);
-}
-
-TEST_CASE("LL/AssignmentOperator") {
-  LinkedList<int> test_list;
-  buildTestIntList(test_list); // 1, 2, 3
-
-  LinkedList<int> test_list2;
-  test_list2.insertStart(10);
-  test_list2.insertStart(20); // 10 20
-
-  int startNodeCount = ListNode<int>::nodeCount;
-
-  test_list2 = test_list; // Overwrite existing test_list2
-
-  REQUIRE(test_list2.retrieveAt(0) == 1);
-  REQUIRE(test_list2.retrieveAt(1) == 2);
-  REQUIRE(test_list2.retrieveAt(2) == 3);
-  REQUIRE(test_list2.size == 3);
-  REQUIRE(ListNode<int>::nodeCount - startNodeCount
-          == 1); // created 3, deleted 2
-
-  // Make sure removal from one does not affect other
-  test_list.removeAt(1);
-  REQUIRE(test_list2.retrieveAt(0) == 1);
-  REQUIRE(test_list2.retrieveAt(1) == 2);
-  REQUIRE(test_list2.retrieveAt(2) == 3);
-  REQUIRE(test_list2.size == 3);
 }

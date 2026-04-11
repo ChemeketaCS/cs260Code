@@ -80,7 +80,7 @@ public:
    * @brief Remove first item from list
    * @throw out_of_range if empty
    */
-  void removeFirst();
+  void removeStart();
 
   /**
    * @brief Removes all values from list
@@ -125,17 +125,25 @@ SimpleLinkedList<T>::SimpleLinkedList() {
 }
 
 template<typename T>
+void SimpleLinkedList<T>::clear() {
+  while(head != nullptr) {
+    ListNode<T>* temp = head;
+    head = head->next;
+    delete temp;
+  }
+}
+
+template<typename T>
+SimpleLinkedList<T>::~SimpleLinkedList() {
+  clear();
+}
+
+template<typename T>
 void SimpleLinkedList<T>::insertStart(const T& value) {
   ListNode<T>* temp = new ListNode<T>(value);
 
   temp->next = head; // old head is what new node points to
   head = temp;       // new node is now head
-}
-
-template<typename T>
-int SimpleLinkedList<T>::listSize() const {
-  // Todo - loop though list and count the number of nodes
-  return 0; // fixme
 }
 
 template<typename T>
@@ -152,7 +160,7 @@ void SimpleLinkedList<T>::print() const {
 
 template<typename T>
 T SimpleLinkedList<T>::retrieveAt(int index) const {
-  if (index < 0)
+  if (index < 0 || head == nullptr)
     throw out_of_range("Index out of range");
 
   ListNode<T>* current = head;
@@ -169,9 +177,9 @@ template<typename T>
 void SimpleLinkedList<T>::removeAt(int index) {
   // No bounds checking!
 
-  // First item is special case... use removeFirst for it
+  // First item is special case... use removeStart for it
   if (index == 0) {
-    removeFirst();
+    removeStart();
     return;
   }
   ListNode<T>* current = head;
@@ -187,7 +195,7 @@ void SimpleLinkedList<T>::removeAt(int index) {
 //-------------------To be implemented-------------------------
 
 template<typename T>
-void SimpleLinkedList<T>::removeFirst() {
+void SimpleLinkedList<T>::removeStart() {
   if (head == nullptr)
     throw out_of_range("Can't remove from empty list");
 
@@ -201,30 +209,10 @@ void SimpleLinkedList<T>::insertAt(int index, const T& value) {
 }
 
 template<typename T>
-void SimpleLinkedList<T>::clear() {
-  // TODO - delete all nodes and make this into a valid empty list
+int SimpleLinkedList<T>::listSize() const {
+  // Todo - loop though list and count the number of nodes
+  return 0; // fixme
 }
 
-template<typename T>
-SimpleLinkedList<T>::~SimpleLinkedList() {
-  clear();
-}
-
-template<typename T>
-SimpleLinkedList<T>::SimpleLinkedList(const SimpleLinkedList<T>& other) {
-  // TODO - Write copy constructor...
-  // Don't forget to initialize head/tail/length
-
-  assert(0); // blow up for now - remove this
-}
-
-template<typename T>
-SimpleLinkedList<T>&
-SimpleLinkedList<T>::operator=(const SimpleLinkedList<T>& other) {
-  // TODO - Write assignment operator...
-  // Don't forget to avoid self assignment
-
-  assert(0); // blow up for now - remove this
-}
 
 #endif

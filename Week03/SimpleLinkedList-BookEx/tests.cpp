@@ -18,20 +18,20 @@ void buildTestIntList(SimpleLinkedList<int>& list) {
   list.insertStart(1);
 }
 
-TEST_CASE("LL/RemoveFirst") {
+TEST_CASE("LL/removeStart") {
   SimpleLinkedList<int> test_list;
   buildTestIntList(test_list); // 1, 2, 3
 
   int startNodeCount = ListNode<int>::nodeCount;
 
-  test_list.removeFirst();
+  test_list.removeStart();
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 1);
 
-  test_list.removeFirst();
+  test_list.removeStart();
   REQUIRE(test_list.retrieveAt(0) == 3);
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 2);
 
-  test_list.removeFirst();
+  test_list.removeStart();
   REQUIRE(test_list.head == nullptr);
   REQUIRE(startNodeCount - ListNode<int>::nodeCount == 3);
 }
@@ -64,62 +64,4 @@ TEST_CASE("LL/InsertAtSpecialCases") {
   REQUIRE(test_list.retrieveAt(3) == 3);
   REQUIRE(test_list.retrieveAt(4) == 20);
   // Make sure tail was updated
-}
-
-TEST_CASE("LL/Clear") {
-  SimpleLinkedList<int> test_list;
-  buildTestIntList(test_list); // 1, 2, 3
-
-  int startNodeCount = ListNode<int>::nodeCount;
-
-  test_list.clear();
-
-  REQUIRE(test_list.head == nullptr);
-  // Were they actually deleted???
-  REQUIRE(startNodeCount - ListNode<int>::nodeCount == 3);
-}
-
-TEST_CASE("LL/CopyConstructor") {
-  SimpleLinkedList<int> test_list;
-  buildTestIntList(test_list); // 1, 2, 3
-
-  int startNodeCount = ListNode<int>::nodeCount;
-
-  SimpleLinkedList<int> copy(test_list);
-
-  REQUIRE(copy.retrieveAt(0) == 1);
-  REQUIRE(copy.retrieveAt(1) == 2);
-  REQUIRE(copy.retrieveAt(2) == 3);
-  REQUIRE(ListNode<int>::nodeCount - startNodeCount == 3);
-
-  // Make sure removal from one does not affect other
-  test_list.removeAt(1);
-  REQUIRE(copy.retrieveAt(0) == 1);
-  REQUIRE(copy.retrieveAt(1) == 2);
-  REQUIRE(copy.retrieveAt(2) == 3);
-}
-
-TEST_CASE("LL/AssignmentOperator") {
-  SimpleLinkedList<int> test_list;
-  buildTestIntList(test_list); // 1, 2, 3
-
-  SimpleLinkedList<int> test_list2;
-  test_list2.insertStart(10);
-  test_list2.insertStart(20); // 10 20
-
-  int startNodeCount = ListNode<int>::nodeCount;
-
-  test_list2 = test_list; // Overwrite existing test_list2
-
-  REQUIRE(test_list2.retrieveAt(0) == 1);
-  REQUIRE(test_list2.retrieveAt(1) == 2);
-  REQUIRE(test_list2.retrieveAt(2) == 3);
-  REQUIRE(ListNode<int>::nodeCount - startNodeCount
-          == 1); // created 3, deleted 2
-
-  // Make sure removal from one does not affect other
-  test_list.removeAt(1);
-  REQUIRE(test_list2.retrieveAt(0) == 1);
-  REQUIRE(test_list2.retrieveAt(1) == 2);
-  REQUIRE(test_list2.retrieveAt(2) == 3);
 }

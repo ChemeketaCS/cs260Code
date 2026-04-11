@@ -35,7 +35,7 @@ int ListNode<T>::nodeCount = 0;
 ///-----------------------------LINKED LIST---------------------------------
 template<typename T>
 class LinkedList {
-  // These would normally be private. 
+  // These would normally be private.
   // They are public to enable simpler unit tests.
 public:
   ListNode<T>* head;
@@ -84,12 +84,17 @@ public:
    * @brief Remove first item from list
    * @throw out_of_range if list is empty
    */
-  void removeFirst();
+  void removeStart();
 
   /**
    * @brief Removes all values from list
    */
   void clear();
+
+  /**
+   * @brief Make a deep copy of another lists nodes
+   */
+  void copyFrom(const LinkedList& other);
 
   /**
    * @brief Insert given value into list at given location
@@ -107,7 +112,7 @@ public:
   void removeAt(int index);
 
   /**
-   * @brief Get the size of the list
+   * @brief Get the length of the list
    * @return int representing number of values (nodes) in list
    */
   int listSize() const;
@@ -119,6 +124,21 @@ public:
    * @return value
    */
   T retrieveAt(int index) const;
+
+  /**
+   * @brief Splice the nodes of another list onto the end of this list.
+   *  After this operation, other list should be empty.
+   * @param other List to splice onto end of this one
+   */
+  void splice(LinkedList& other);
+
+  /**
+   * @brief Split this list into two halves. The first half should remain in
+   * this list, and the second half should be returned as a new list. If there
+   * are an odd number of nodes, the extra node should go in the second half.
+   * @return LinkedList containing second half of original list
+   */
+  LinkedList sliceInHalf();
 };
 
 //-------------------Provided Functions-------------------------
@@ -174,8 +194,9 @@ T LinkedList<T>::retrieveAt(int index) const {
     throw out_of_range("Bad index in retrieveAt");
 
   ListNode<T>* current = head;
-  for (int stepsLeft = index; stepsLeft > 0; stepsLeft--) {
+  for (int i = 0; i < index; i++) {
     current = current->next;
+    // No need to check for nullptr here
   }
 
   return current->data;
@@ -187,8 +208,8 @@ void LinkedList<T>::removeAt(int index) {
     throw out_of_range("Bad index in removeAt");
 
   if (index == 0) {
-    // First item is special case... use removeFirst for it
-    removeFirst();
+    // First item is special case... use removeStart for it
+    removeStart();
     return;
   }
 
@@ -211,15 +232,27 @@ void LinkedList<T>::removeAt(int index) {
   size--;
 }
 
+template<typename T>
+LinkedList<T>::~LinkedList() {
+  clear();
+}
+
 //-------------------To be implemented-------------------------
 
 template<typename T>
 void LinkedList<T>::insertEnd(const T& value) {
-  // TODO - Fixme
+    // TODO - fixme
+    ListNode<T>* newNode = new ListNode<T>(value);
+    if (size == 0) {
+      // node is both head and tail
+    } else {
+      // attach to end of list and update tail
+    }
+    size++;
 }
 
 template<typename T>
-void LinkedList<T>::removeFirst() {
+void LinkedList<T>::removeStart() {
   if (head == nullptr)
     throw out_of_range("Can't remove from empty list");
 
@@ -240,24 +273,28 @@ void LinkedList<T>::clear() {
 }
 
 template<typename T>
-LinkedList<T>::~LinkedList() {
-  clear();
+void LinkedList<T>::copyFrom(const LinkedList<T>& other) {
+  // TODO - copy all values from other into this list. Assume this is
+  // a valid empty list
 }
 
 template<typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& other) {
-  // TODO - Write copy constructor...
-  // Don't forget to initialize head/tail/size
-
-  assert(0); // blow up for now - remove this
+  head = nullptr;
+  tail = nullptr;
+  size = 0;
+  copyFrom(other);
 }
 
 template<typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other) {
-  // TODO - Write assignment operator...
-  // Don't forget to avoid self assignment
-
-  assert(0); // blow up for now - remove this
+  if (this == &other) {
+    return *this; // Handle self-assignment
+  }
+  clear(); // remove existing nodes, reset head, tail, size
+  copyFrom(other);
+  return *this;
 }
+
 
 #endif
