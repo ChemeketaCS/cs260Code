@@ -84,7 +84,8 @@ public:
   // declared but not implemented:
   LinkedList<T>& operator=(const LinkedList<T>& otherList);
 
-  void insertEnd(T value);
+  void insertEnd(const T& value);
+  void insertStart(const T& value);
   T removeStart();
   T retrieveAt(int index) const;
 };
@@ -92,7 +93,7 @@ public:
 ///-----------------------------SORT RELATED-----------------------
 
 template<typename T>
-void LinkedList<T>::splice(LinkedList<T>& otherList) {
+void LinkedList<T>::splice(LinkedList<T>& other) {
   // TODO - FIXME
   // Move all data from otherList to this one
   // Other list ends up empty
@@ -100,11 +101,6 @@ void LinkedList<T>::splice(LinkedList<T>& otherList) {
 
 template<typename T>
 LinkedList<T> LinkedList<T>::sliceInHalf() {
-  ListNode<T>* cur = head;
-  for (int i = 0; i < size / 2 - 1; i++) {
-    cur = cur->next;
-  }
-
   // Create the LinkedList we will return
   LinkedList<T> otherList;
 
@@ -143,7 +139,7 @@ LinkedList<T>::LinkedList(const LinkedList<T>& otherList) {
 }
 
 template<typename T>
-void LinkedList<T>::insertEnd(T value) {
+void LinkedList<T>::insertEnd(const T& value) {
   ListNode<T>* current = new ListNode<T>(value);
   if (size == 0) {
     head = current;
@@ -151,6 +147,16 @@ void LinkedList<T>::insertEnd(T value) {
     tail->next = current;
   }
   tail = current;
+  size++;
+}
+
+void LinkedList<T>::insertStart(const T& value) {
+  ListNode<T>* current = new ListNode<T>(value);
+  current->next = head;
+  head = current;
+  if (size == 0) {
+    tail = current;
+  }
   size++;
 }
 
