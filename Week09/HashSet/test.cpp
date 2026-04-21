@@ -3,8 +3,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-
-
 // Use Approx from doctest without saying doctest::Approx
 using doctest::Approx;
 
@@ -18,7 +16,7 @@ TEST_CASE("Contains") {
   StringHashTable t;
   t.buckets[t.getBucket("A")] = "A";
 
-  INFO(t);
+  INFO(t.toString());
   REQUIRE(t.contains("A"));
 }
 
@@ -40,7 +38,7 @@ TEST_CASE("ContainsProbe") {
   int nextBucket = targetBucket + 1;
   t.buckets[nextBucket] = key;
 
-  INFO(t);
+  INFO(t.toString());
   REQUIRE(t.contains(key));
 }
 
@@ -62,7 +60,7 @@ TEST_CASE("ContainsProbeWithWrap") {
   // Place key in location 0 and see if we find it
   t.buckets[0] = key;
 
-  INFO(t);
+  INFO(t.toString());
   REQUIRE(t.contains(key));
 }
 
@@ -71,8 +69,8 @@ TEST_CASE("Insert") {
   t.insert("B");
 
   unsigned int targetBucket = t.getBucket("B");
-  INFO(targetBucket);
-  INFO(t);
+  INFO("targetBucket" << targetBucket);
+  INFO(t.toString());
   REQUIRE(t.buckets[targetBucket] == "B");
   REQUIRE(t.currentSize == 1);
 }
@@ -97,7 +95,7 @@ TEST_CASE("InsertWithProbe") {
   // Then add item
   t.insert(key);
 
-  INFO(t);
+  INFO(t.toString());
   REQUIRE(t.buckets[4] == key);
   REQUIRE(t.currentSize == 4);
 }
@@ -121,7 +119,7 @@ TEST_CASE("InsertWith Wrap") {
   // Place key
   t.insert(key);
 
-  INFO(t);
+  INFO(t.toString());
   REQUIRE(t.buckets[1] == key);
   REQUIRE(t.currentSize == 3);
 }
@@ -146,7 +144,7 @@ TEST_CASE("InsertWithProbe") {
   // Then add item
   t.insert(key);
 
-  INFO(t);
+  INFO(t.toString());
   REQUIRE(t.buckets[4] == key);
   REQUIRE(t.currentSize == 4);
 }
@@ -156,9 +154,36 @@ TEST_CASE("Remove") {
   t.insert("C");
   t.remove("C");
 
-  INFO(t);
+  INFO(t.toString());
   REQUIRE(!t.contains("C"));
   REQUIRE(t.currentSize == 0);
+}
+
+TEST_CASE("RemoveWithProbe") {
+  StringHashTable t;
+
+  // Find something that occupies location 1
+  string key = "B";
+  int targetBucket = t.getBucket(key);
+  while (targetBucket != 1) {
+    key += "B";
+    targetBucket = t.getBucket(key);
+  }
+
+  // Fill that and next two
+  t.buckets[1] = "No";
+  t.buckets[2] = "No";
+  t.buckets[3] = "No";
+  t.currentSize = 3;
+
+  // Then add item and remove it
+  t.buckets[4] = key;
+  t.currentSize = 4;
+  t.remove(key);
+
+  INFO(t.toString());
+  REQUIRE(!t.contains(key));
+  REQUIRE(t.currentSize == 3);
 }
 
 TEST_CASE("RemoveAndInsert") {
@@ -179,7 +204,9 @@ TEST_CASE("RemoveAndInsert") {
   // Should replace the tombstone at location targetBucket
   t.insert(key);
 
-  INFO(t);
+  INFO("Testing if insert reused tombstone bucket");
+  INFO("If you fail this, check your insert and update to handle tombstones");
+  INFO(t.toString());
   REQUIRE(t.buckets[targetBucket] == key);
   REQUIRE(t.currentSize == 1);
 }
@@ -200,7 +227,9 @@ TEST_CASE("ContainsWithTombstone") {
   t.insert("C");
   t.remove(key);
 
-  INFO(t);
+  INFO("Testing if contains reads past tombstone bucket");
+  INFO("If you fail this, check your contains");
+  INFO(t.toString());
   REQUIRE(t.contains("C"));
   REQUIRE(t.currentSize == 1);
 }

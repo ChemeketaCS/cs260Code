@@ -11,7 +11,7 @@ StringHashTable::StringHashTable(int numBuckets) {
   tableCapacity = numBuckets;
   buckets = new string[numBuckets];
 
-  // We can count on strings bein initialized to "" which is our EMPTY_CELL
+  // We can count on strings being initialized to "" which is our EMPTY_CELL
   // value If some other value was EMPTY_CELL we would need:
   //     for(int i = 0; i < tableSize; i++)
   //         buckets[i] = EMPTY_CELL;
@@ -21,22 +21,22 @@ StringHashTable::~StringHashTable() {
   delete[] buckets;
 }
 
-ostream& operator<<(ostream& os, const StringHashTable& theSet) {
-  os << "Buckets[ ";
-  for (int i = 0; i < theSet.tableCapacity; i++) {
-    if (theSet.buckets[i] == theSet.EMPTY_CELL)
-      cout << "_ ";
-    else if (theSet.buckets[i] == theSet.PREVIOUS_USED_CELL)
-      cout << "# ";
-    else
-      cout << theSet.buckets[i] << " ";
-  }
-  os << "]";
-  return os;
-}
-
 int StringHashTable::size() const {
   return currentSize;
+}
+
+string StringHashTable::toString() const {
+  string result = "Buckets[ ";
+  for (int i = 0; i < tableCapacity; i++) {
+    if (buckets[i] == EMPTY_CELL)
+      result += "_ ";
+    else if (buckets[i] == PREVIOUS_USED_CELL)
+      result += "# ";
+    else
+      result += buckets[i] + " ";
+  }
+  result += "]";
+  return result;
 }
 
 unsigned int StringHashTable::getBucket(const std::string& key) const {
@@ -55,7 +55,6 @@ bool StringHashTable::contains(const std::string& key) const {
   int bucketNumber = getBucket(key);
 
   // TODO - Fix me
-  // Search starting at bucketNumber until find item or empty
 
   return false;
 }
@@ -84,6 +83,6 @@ void StringHashTable::remove(const std::string& key) {
 
 void StringHashTable::grow() {
   // TODO - Fix me
-  // Allocate new storage that is oldCapacity * 2 + 1 in size
+  // Allocate new storage that is oldCapacity * 2 in size
   // Rehash all non-empty/tombstone value from old array back into table
 }

@@ -39,8 +39,7 @@ public:
   StringHashTable& operator=(const StringHashTable& other);
 
   // Printing
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const StringHashTable& theSet);
+  std::string toString() const;
 };
 
 #endif // HASHSET_H
