@@ -74,6 +74,11 @@ Queue<T>::~Queue() {
   delete[] list;
 }
 
+template<typename T>
+bool Queue<T>::empty() const {
+  return start == end;
+}
+
 //-----------Functions to be built------------------
 
 template<typename T>
