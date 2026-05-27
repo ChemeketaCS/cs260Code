@@ -1,0 +1,38 @@
+{
+    "tasks": [
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "mingw32-make"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc",
+                {
+                    "owner": "cpp",
+                    "fileLocation": [
+                        "absolute"
+                    ],
+                    "pattern": {
+                        "regexp": "^(.*):(\\d*).*:\\s+(undefined reference to.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3
+                    }
+                },
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "revealProblems": "onProblem"
+            },
+        }
+    ],
+    "version": "2.0.0"
+}

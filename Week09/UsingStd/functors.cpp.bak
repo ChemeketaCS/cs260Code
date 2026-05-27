@@ -37,15 +37,18 @@ int main() {
     Point p2 = {4, 3};
     Point p3 = {3, 1};
 
+    // // Does not work...
+    // std::unordered_set<Point> s0;
+
     //Use PointHasher for hashing, == for equality comparison
-    std::unordered_set<Point, PointHasher> s;
-    s.insert(p1);
-    s.insert(p2);
+    std::unordered_set<Point, PointHasher> s1;
+    s1.insert(p1);
+    s1.insert(p2);
 
     //Use PointHasher for hashing, PointEquals for equality
     std::unordered_set<Point, PointHasher, PointEquals> s2;
 
-    cout << std::count(s.begin(), s.end(), p1)  << endl;
-    cout << std::count(s.begin(), s.end(), p2) << endl;
-    cout << std::count(s.begin(), s.end(), p3) << endl;
+    cout << std::count(s1.begin(), s1.end(), p1)  << endl;
+    cout << std::count(s1.begin(), s1.end(), p2) << endl;
+    cout << std::count(s1.begin(), s1.end(), p3) << endl;
 }
