@@ -8,16 +8,6 @@ using doctest::Approx;
 
 #include "CharBST.h"
 
-BSTNode* rotateLeft(BSTNode* parent) {
-  /// TODO - fixme
-  return nullptr;
-}
-
-BSTNode* rotateRight(BSTNode* parent) {
-  /// TODO - fixme
-  return nullptr;
-}
-
 int getHeight(BSTNode* node) {
   // TODO - fixme
   return -1;
@@ -28,6 +18,16 @@ int getBalance(BSTNode* node) {
   return -1;
 }
 
+
+BSTNode* rotateLeft(BSTNode* node) {
+  /// TODO - fixme
+  return nullptr;
+}
+
+BSTNode* rotateRight(BSTNode* node) {
+  /// TODO - fixme
+  return nullptr;
+}
 using namespace std;
 
 /* Adds test data to produce this tree:
@@ -53,58 +53,6 @@ void insertTestData(CharBST& c) {
   c.root->right->right = new BSTNode('Y');
   c.root->right->left = new BSTNode('J');
   c.root->right->left->right = new BSTNode('M');
-}
-
-TEST_CASE("RotateRightAtC") {
-  CharBST bst;
-  insertTestData(bst);
-
-  BSTNode* target = bst.root->left;
-
-  BSTNode* newParent = rotateRight(target);
-
-  REQUIRE(newParent->value == 'B');
-  REQUIRE(newParent->right->value == 'C');
-  REQUIRE(newParent->right->left == nullptr);
-}
-
-TEST_CASE("RotateRightAtG") {
-  CharBST bst;
-  insertTestData(bst);
-
-  BSTNode* target = bst.root;
-
-  BSTNode* newParent = rotateRight(target);
-
-  REQUIRE(newParent->value == 'C');
-  REQUIRE(newParent->right->value == 'G');
-  REQUIRE(newParent->right->left->value == 'F');
-}
-
-TEST_CASE("RotateLeftAtC") {
-  CharBST bst;
-  insertTestData(bst);
-
-  BSTNode* target = bst.root->left;
-
-  BSTNode* newParent = rotateLeft(target);
-
-  REQUIRE(newParent->value == 'F');
-  REQUIRE(newParent->left->value == 'C');
-  REQUIRE(newParent->left->right == nullptr);
-}
-
-TEST_CASE("RotateLeftAtG") {
-  CharBST bst;
-  insertTestData(bst);
-
-  BSTNode* target = bst.root;
-
-  BSTNode* newParent = rotateLeft(target);
-
-  REQUIRE(newParent->value == 'P');
-  REQUIRE(newParent->left->value == 'G');
-  REQUIRE(newParent->left->right->value == 'J');
 }
 
 TEST_CASE("Height") {
@@ -136,4 +84,60 @@ TEST_CASE("Balance") {
 
   int fullBal = getBalance(bst.root);
   REQUIRE(fullBal == 1);
+}
+
+TEST_CASE("RotateRightAtC") {
+  CharBST bst;
+  insertTestData(bst);
+
+  BSTNode* target = bst.root->left;
+
+  BSTNode* newParent = rotateRight(target);
+  bst.root->left = newParent; // update the parent of the rotated subtree
+
+  REQUIRE(newParent->value == 'B');
+  REQUIRE(newParent->right->value == 'C');
+  REQUIRE(newParent->right->left == nullptr);
+}
+
+TEST_CASE("RotateRightAtG") {
+  CharBST bst;
+  insertTestData(bst);
+
+  BSTNode* target = bst.root;
+
+  BSTNode* newParent = rotateRight(target);
+  bst.root = newParent; // update the parent of the rotated subtree
+
+  REQUIRE(newParent->value == 'C');
+  REQUIRE(newParent->right->value == 'G');
+  REQUIRE(newParent->right->left->value == 'F');
+}
+
+TEST_CASE("RotateLeftAtC") {
+  CharBST bst;
+  insertTestData(bst);
+
+  BSTNode* target = bst.root->left;
+
+  BSTNode* newParent = rotateLeft(target);
+  bst.root->left = newParent; // update the parent of the rotated subtree
+
+  REQUIRE(newParent->value == 'F');
+  REQUIRE(newParent->left->value == 'C');
+  REQUIRE(newParent->left->right == nullptr);
+}
+
+TEST_CASE("RotateLeftAtG") {
+  CharBST bst;
+  insertTestData(bst);
+
+  BSTNode* target = bst.root;
+
+  BSTNode* newParent = rotateLeft(target);
+  bst.root = newParent; // update the parent of the rotated subtree
+
+  REQUIRE(newParent->value == 'P');
+  REQUIRE(newParent->left->value == 'G');
+  REQUIRE(newParent->left->right->value == 'J');
 }

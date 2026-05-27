@@ -1,264 +1,147 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include "SearchTree.h"
+#include <format>
+#include <iostream>
 #include <list>
-#include <queue>
+#include <stdexcept>
+#include <unordered_map>
 #include <vector>
 
-using namespace std;
-
-/** Represents a possibly directed graph where nodes are of type T
-    Internal storage based on an AdjacencyList
-**/
 template<typename T>
 class Graph {
-private:
-  // List of values vertices represent
-  vector<T> vertexValues;
-
-  // List of edge lists of each vertex
-  // could replace inner vertex with list to reduce storage overhead
-  vector<vector<int>> neighbors;
-
 public:
-  /** Construct an empty graph */
-  Graph();
-
-  /** Construct a graph from an array of vertex names */
-  Graph(T vertexValues[], int size);
-
-  /** Return the number of vertices in the graph */
-  int getSize() const;
-
-  /** Return the degree for a specified vertex */
-  int getDegree(int v) const;
-
-  /** Return the vertex for the specified index */
-  T getVertex(int index) const;
-
-  /** Return the index for the specified vertex */
-  int getIndex(T v) const;
-
-  /** Return the vertices in the graph */
-  vector<T> getVertices() const;
-
-  /** Return the neighbors of vertex v */
-  vector<int> getNeighbors(int v) const;
-
-  /** Add a directed edge connecting vertex v to vertex u **/
-  void addEdge(int v, int u);
-
+  void addVertex(T vertex);
+  void removeVertex(T vertex);
+  bool hasVertex(T vertex) const;
+  void addEdge(T source, T destination, int weight = 1, bool directed = true);
+  void removeEdge(T source, T destination);
+  bool hasEdge(T source, T destination) const;
+  int getEdgeWeight(T source, T destination) const;
+  std::list<T> getNeighbors(T vertex) const;
   void printAdjacencyList() const;
   void printAdjacencyMatrix() const;
 
-  /** bfs search from vertex v
-      Return a SearchTree representing what is discovered
-  */
-  SearchTree bfs(int v) const;
-
-  /** dfs search from vertex v
-      Return a SearchTree representing what is discovered
-  */
-  SearchTree dfsRecursive(int v) const;
-  SearchTree dfsIterative(int v) const;
-
 private:
-  void dfsRecursiveHelper(int curLocation, vector<int>& parent,
-                          vector<bool>& visited) const;
+  std::unordered_map<T, std::unordered_map<T, int>> adjacencyMap;
 };
 
 template<typename T>
-Graph<T>::Graph() {
-}
-
-template<typename T>
-Graph<T>::Graph(T vertices[], int size) {
-  // store the values associated with each vertex
-  for (int i = 0; i < size; i++)
-    vertexValues.push_back(vertices[i]);
-
-  // make an empty list of edges for each vertex
-  for (int i = 0; i < size; i++)
-    neighbors.push_back(vector<int>());
-}
-
-template<typename T>
-int Graph<T>::getSize() const {
-  return vertexValues.size();
-}
-
-template<typename T>
-int Graph<T>::getDegree(int v) const {
-  return neighbors[v].size();
-}
-
-template<typename T>
-T Graph<T>::getVertex(int index) const {
-  return vertexValues[index];
-}
-
-template<typename T>
-int Graph<T>::getIndex(T v) const {
-  for (int i = 0; i < vertexValues.size(); i++) {
-    if (vertexValues[i] == v)
-      return i;
+void Graph<T>::addVertex(T vertex) {
+  if (!adjacencyMap.contains(vertex)) {
+    adjacencyMap.insert({vertex, std::unordered_map<T, int>()});
   }
-
-  return -1; // If vertex is not in the graph
 }
 
 template<typename T>
-vector<T> Graph<T>::getVertices() const {
-  return vertexValues;
+void Graph<T>::removeVertex(T vertex) {
+  // erase returns count of how many records were erased
+  size_t count = adjacencyMap.erase(vertex);
+  // if vertex removed, also check all other vertices and remove any edges to
+  // this vertex
+  if (count > 0) {
+    for (auto& [v, neighbors] : adjacencyMap) {
+      neighbors.erase(vertex);
+    }
+  }
 }
 
 template<typename T>
-vector<int> Graph<T>::getNeighbors(int v) const {
-  return neighbors[v];
+bool Graph<T>::hasVertex(T vertex) const {
+  return adjacencyMap.contains(vertex);
 }
 
 template<typename T>
-void Graph<T>::addEdge(int u, int v) {
-  neighbors[u].push_back(v);
+void Graph<T>::addEdge(T source, T destination, int weight, bool directed) {
+  // for convenience, if source or destination do not exist, add them
+  addVertex(source);
+  addVertex(destination);
+
+  // add or update the edge from source to destination with the given weight
+  adjacencyMap.at(source).insert({destination, weight});
+
+  if (!directed) {
+    // add or update the edge from destination to source with the given weight
+    adjacencyMap.at(destination).insert({source, weight});
+  }
+}
+
+template<typename T>
+void Graph<T>::removeEdge(T source, T destination) {
+  if (adjacencyMap.contains(source)) {
+    adjacencyMap.at(source).erase(destination);
+  }
+}
+
+template<typename T>
+bool Graph<T>::hasEdge(T source, T destination) const {
+  if (adjacencyMap.contains(source)) {
+    return adjacencyMap.at(source).contains(destination);
+  }
+  return false;
+}
+
+template<typename T>
+int Graph<T>::getEdgeWeight(T source, T destination) const {
+  if (adjacencyMap.contains(source)
+      && adjacencyMap.at(source).contains(destination)) {
+    return adjacencyMap.at(source).at(destination);
+  }
+  throw std::logic_error("Edge does not exist");
+}
+
+template<typename T>
+std::list<T> Graph<T>::getNeighbors(T vertex) const {
+  // Return a list of the neighbors of the given vertex.
+  // If the vertex does not exist, return an empty list.
+  std::list<T> neighborsList;
+  if (adjacencyMap.contains(vertex)) {
+    for (const auto& [neighbor, weight] : adjacencyMap.at(vertex)) {
+      neighborsList.push_back(neighbor);
+    }
+  }
+  return neighborsList;
 }
 
 template<typename T>
 void Graph<T>::printAdjacencyList() const {
-  cout << "Adjaceny list format:" << endl;
-  for (size_t u = 0; u < neighbors.size(); u++) {
-    cout << "Vertex " << u << ": ";
-    for (size_t v = 0; v < neighbors[u].size(); v++) {
-      cout << neighbors[u][v] << " ";
+  for (const auto& [vertex, neighbors] : adjacencyMap) {
+    std::cout << vertex << ": ";
+    for (const auto& [neighbor, weight] : neighbors) {
+      std::cout << neighbor << "(" << weight << ") ";
     }
-    cout << endl;
+    std::cout << std::endl;
   }
 }
 
 template<typename T>
 void Graph<T>::printAdjacencyMatrix() const {
-  cout << "Adjaceny matrix format:" << endl;
-
-  size_t size = vertexValues.size();
-  // Use vector for 2-D array
-  vector<vector<int>> adjacencyMatrix(size);
-
-  // Initialize 2-D array for adjacency matrix
-  for (size_t i = 0; i < size; i++) {
-    adjacencyMatrix[i] = vector<int>(size);
+  // Get a list of all vertices to maintain a consistent order
+  std::vector<T> vertices;
+  for (const auto& [vertex, _] : adjacencyMap) {
+    vertices.push_back(vertex);
   }
 
-  for (size_t u = 0; u < neighbors.size(); u++) {
-    // for each neighbor
-    for (size_t j = 0; j < neighbors[u].size(); j++) {
-      // figure out its index
-      int v = neighbors[u][j];
-
-      // update matrix at that index
-      adjacencyMatrix[u][v] = 1;
-    }
+  // Print header
+  std::cout << "    ";
+  for (const auto& vertex : vertices) {
+    std::cout << std::format("{:4}", vertex);
   }
+  std::cout << std::endl;
 
-  for (size_t i = 0; i < adjacencyMatrix.size(); i++) {
-    for (size_t j = 0; j < adjacencyMatrix[i].size(); j++) {
-      cout << adjacencyMatrix[i][j] << " ";
-    }
-
-    cout << endl;
-  }
-}
-
-template<typename T>
-SearchTree Graph<T>::bfs(int startVertex) const {
-  // list of parent node in search tree for each vertex - all initalized to no
-  // parent (-1)
-  vector<int> parentList(vertexValues.size(), -1);
-
-  // list of vertices that we have seen - all start as false except for starting
-  // vertex
-  vector<bool> isSeen(vertexValues.size(), false);
-  isSeen[startVertex] = true;
-
-  // queue of vertices we need to explore - initially just the starting point
-  list<int> queue;
-  queue.push_back(startVertex);
-
-  while (!queue.empty()) {
-    int u = queue.front(); // Get the next vertex in queue
-    queue.pop_front();     // Remove it from queue
-
-    // for each edge from parent
-    for (size_t j = 0; j < neighbors[u].size(); j++) {
-      int neighbor = neighbors[u][j];
-      if (!isSeen[neighbor]) {
-        queue.push_back(neighbor); // Add it to exploration queue
-        parentList[neighbor] = u;  // The parent of w is u
-        isSeen[neighbor] = true;
+  // Print each row of the adjacency matrix
+  for (const auto& vertex : vertices) {
+    std::cout << std::format("{}", vertex);
+    for (const auto& otherVertex : vertices) {
+      if (adjacencyMap.contains(vertex)
+          && adjacencyMap.at(vertex).contains(otherVertex)) {
+        std::cout << std::format("{:4}",
+                                 adjacencyMap.at(vertex).at(otherVertex));
+      } else {
+        std::cout << "   0";
       }
     }
-  }
-
-  return SearchTree(startVertex, parentList);
-}
-
-template<typename T>
-SearchTree Graph<T>::dfsIterative(int startVertex) const {
-  // list of parent node in search tree for each vertex - all initalized to no
-  // parent (-1)
-  vector<int> parentList(vertexValues.size(), -1);
-
-  // list of vertices that we have visited - initially nothing
-  vector<bool> isVisited(vertexValues.size(), false);
-
-  // stack of vertices we need to explore - initially just the starting point
-  list<int> stack;
-  stack.push_back(startVertex);
-
-  while (!stack.empty()) {
-    int u = stack.back(); // Get the top vertex in stack
-    stack.pop_back();     // Remove it from stack
-
-    if (!isVisited[u]) {
-      isVisited[u] = true;
-
-      // for each edge from parent
-      //  do in reverse order so edge to lowest index vertex gets explored first
-      for (int j = static_cast<int>(neighbors[u].size()) - 1; j >= 0; j--) {
-        int neighbor = neighbors[u][j];
-        if (!isVisited[neighbor]) {
-          stack.push_back(neighbor); // Add it to exploration stack
-          parentList[neighbor] = u;  // The parent of w is u
-        }
-      }
-    }
-  }
-
-  return SearchTree(startVertex, parentList);
-}
-
-template<typename T>
-SearchTree Graph<T>::dfsRecursive(int startVertex) const {
-  // list of parent node in search tree for each vertex - all initalized to no
-  // parent (-1)
-  vector<int> parentList(vertexValues.size(), -1);
-
-  // list of vertices that we have visited - initially nothing
-  vector<bool> isVisited(vertexValues.size(), false);
-
-  dfsRecursiveHelper(startVertex, parentList, isVisited);
-
-  return SearchTree(startVertex, parentList);
-}
-
-template<typename T>
-void Graph<T>::dfsRecursiveHelper(int curLocation, vector<int>& parentList,
-                                  vector<bool>& isVisited) const {
-  isVisited[curLocation] = true;
-  for (int i : neighbors[curLocation]) {
-    if (isVisited[i] == false) {
-      parentList[i] = curLocation;
-      dfsRecursiveHelper(i, parentList, isVisited);
-    }
+    std::cout << std::endl;
   }
 }
 
