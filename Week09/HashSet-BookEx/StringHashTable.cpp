@@ -7,33 +7,33 @@
 using namespace std;
 
 StringHashTable::StringHashTable(int numBuckets) {
-  currentSize = 0;
-  tableCapacity = numBuckets;
-  buckets = new string[numBuckets];
+  m_size = 0;
+  m_capacity = numBuckets;
+  m_buckets = new string[numBuckets];
 
-  // We can count on strings being initialized to "" which is our EMPTY_CELL
-  // value If some other value was EMPTY_CELL we would need:
+  // We can count on strings being initialized to "" which is our EMPTY
+  // value If some other value was EMPTY we would need:
   //     for(int i = 0; i < tableSize; i++)
-  //         buckets[i] = EMPTY_CELL;
+  //         buckets[i] = EMPTY;
 }
 
 StringHashTable::~StringHashTable() {
-  delete[] buckets;
+  delete[] m_buckets;
 }
 
 int StringHashTable::size() const {
-  return currentSize;
+  return m_size;
 }
 
 string StringHashTable::toString() const {
   string result = "Buckets[ ";
-  for (int i = 0; i < tableCapacity; i++) {
-    if (buckets[i] == EMPTY_CELL)
+  for (int i = 0; i < m_capacity; i++) {
+    if (m_buckets[i] == EMPTY)
       result += "_ ";
-    else if (buckets[i] == PREVIOUS_USED_CELL)
+    else if (m_buckets[i] == TOMBSTONE)
       result += "# ";
     else
-      result += buckets[i] + " ";
+      result += m_buckets[i] + " ";
   }
   result += "]";
   return result;
@@ -45,11 +45,11 @@ unsigned int StringHashTable::getBucket(const std::string& key) const {
   unsigned int hashValue = static_cast<unsigned int>(hasher(key));
 
   // return that mapped onto table
-  return hashValue % tableCapacity;
+  return hashValue % m_capacity;
 }
 
 bool StringHashTable::contains(const std::string& key) const {
-  if (key == EMPTY_CELL || key == PREVIOUS_USED_CELL)
+  if (key == EMPTY || key == TOMBSTONE)
     throw invalid_argument("Invalid key");
 
   int bucketNumber = getBucket(key);
@@ -60,11 +60,11 @@ bool StringHashTable::contains(const std::string& key) const {
 }
 
 void StringHashTable::insert(const std::string& key) {
-  if (key == EMPTY_CELL || key == PREVIOUS_USED_CELL)
+  if (key == EMPTY || key == TOMBSTONE)
     throw invalid_argument("Invalid key");
 
   // grow if needed
-  if (currentSize > MAX_LOAD * tableCapacity)
+  if (m_size > MAX_LOAD * m_capacity)
     grow();
 
   // TODO - Fix me
@@ -73,7 +73,7 @@ void StringHashTable::insert(const std::string& key) {
 }
 
 void StringHashTable::remove(const std::string& key) {
-  if (key == EMPTY_CELL || key == PREVIOUS_USED_CELL)
+  if (key == EMPTY || key == TOMBSTONE)
     throw invalid_argument("Invalid value");
 
   // TODO - Fix me

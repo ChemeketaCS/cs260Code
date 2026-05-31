@@ -7,15 +7,15 @@
 class StringHashTable {
   // Normally private, made public to allow intrusive unit tests
 public:
-  int tableCapacity; // size of buckets array
-  int currentSize;   // items in set
-  std::string* buckets;
+  int m_capacity; // size of buckets array
+  int m_size;     // items in set
+  std::string* m_buckets;
   const double MAX_LOAD = 0.7;
 
   // value used to indicate a cell is empty - cannot be stored in set
-  const std::string EMPTY_CELL = "";
+  const std::string EMPTY = "";
   // value used to indicate a cell is empty but once had a value
-  const std::string PREVIOUS_USED_CELL = "#";
+  const std::string TOMBSTONE = "#";
 
   // reallocate new storage array
   void grow();
